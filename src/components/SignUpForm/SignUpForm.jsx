@@ -6,8 +6,11 @@ const log = debug("mern:components:SignUpForm");
 
 export default class SignUpForm extends Component {
   state = {
-    name: "simon",
-    email: "",
+    name: "",
+    dogName: "",
+    breed: "",
+    weight: "",
+    username: "",
     password: "",
     confirm: "",
     error: "",
@@ -51,10 +54,40 @@ export default class SignUpForm extends Component {
           <br />
 
           <label>
-            Email:
+            Dog Name:
             <input
-              name="email"
-              value={this.state.email}
+              name="dogName"
+              value={this.state.dogName}
+              onChange={this.handleChange}
+            />
+          </label>
+          <br />
+
+          <label>
+            Breed:
+            <input
+              name="breed"
+              value={this.state.breed}
+              onChange={this.handleChange}
+            />
+          </label>
+          <br />
+
+          <label>
+            Weight:
+            <input
+              name="weight"
+              value={this.state.weight}
+              onChange={this.handleChange}
+            />
+          </label>
+          <br />
+
+          <label>
+            Username:
+            <input
+              name="username"
+              value={this.state.username}
               onChange={this.handleChange}
             />
           </label>
