@@ -7,7 +7,7 @@ const SALT_ROUNDS = 6;
 const userSchema = new Schema(
   {
     name: { type: String, required: true },
-    email: {
+    username: {
       type: String,
       unique: true,
       trim: true,
@@ -20,6 +20,12 @@ const userSchema = new Schema(
       minLength: 3,
       required: true,
     },
+    dogName: { type: String },
+    breed: { type: String },
+    weight: { type: String },
+    companyName: { type: String },
+    address: { type: String },
+    service: { type: String },
   },
   {
     timestamps: true,
@@ -29,7 +35,7 @@ const userSchema = new Schema(
         return ret;
       },
     },
-  },
+  }
 );
 
 userSchema.pre("save", async function (next) {

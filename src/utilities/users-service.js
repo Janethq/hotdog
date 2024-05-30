@@ -38,9 +38,9 @@ export const logOut = () => {
   localStorage.removeItem("token");
 };
 
-export const login = async (email, password) => {
-  log("%s, %s", email, password);
-  const user = { email, password };
+export const login = async (username, password) => {
+  log("%s, %s", username, password);
+  const user = { username, password };
 
   const token = await usersAPI.login(user);
   log("token: %o", token);
