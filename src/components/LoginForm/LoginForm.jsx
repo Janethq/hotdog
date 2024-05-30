@@ -37,15 +37,6 @@ export default function LoginForm({ setUser }) {
         </label>
         <br />
         <button>Login</button>
-        <br />
-        <br />
-
-        <label>You are a:</label>
-        <select name="loginType" id="type">
-          <option value="dogOwner">Dog Owner</option>
-          <option value="vendor">Vendor</option>
-        </select>
-        <button>Register</button>
       </fieldset>
     </form>
   );

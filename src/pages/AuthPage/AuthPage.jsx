@@ -1,11 +1,26 @@
 import LoginForm from "../../components/LoginForm/LoginForm";
-import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import DogOwnerSignUpForm from "../../components/SignUpForm/DogOwnerSignUpForm";
+import VendorSignUpForm from "../../components/SignUpForm/VendorSignUpForm";
+import { useState } from "react";
 
 export default function AuthPage({ setUser }) {
+  const [loginType, setLoginType] = useState(null);
+
+  const handleLoginTypeChange = (event) => {
+    setLoginType(event.target.value);
+  };
+
   return (
     <>
       <LoginForm setUser={setUser} />
-      <SignUpForm setUser={setUser} />
+      <select name="loginType" onChange={handleLoginTypeChange}>
+        <option value="">Select Registration type</option>
+        <option value="dogOwner">Dog Owner</option>
+        <option value="vendor">Vendor</option>
+      </select>
+      {/* if select dog owner, the dog owner signup form will render */}
+      {loginType === "dogOwner" && <DogOwnerSignUpForm setUser={setUser} />}
+      {loginType === "vendor" && <VendorSignUpForm setUser={setUser} />}
     </>
   );
 }
