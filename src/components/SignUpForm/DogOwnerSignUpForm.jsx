@@ -4,7 +4,7 @@ import { signUp } from "../../utilities/users-service";
 
 const log = debug("mern:components:SignUpForm");
 
-export default class SignUpForm extends Component {
+export default class DogOwnerSignUpForm extends Component {
   state = {
     name: "",
     dogName: "",
