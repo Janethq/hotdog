@@ -4,7 +4,7 @@ import { checkToken } from "../../utilities/users-service";
 
 const log = debug("mern:pages:OrderHistoryPage");
 
-export default function OrderHistoryPage() {
+export default function Profile() {
   const handleCheckToken = async () => {
     const expDate = await checkToken();
     log("expDate: %o", expDate);
@@ -12,7 +12,7 @@ export default function OrderHistoryPage() {
 
   return (
     <>
-      <p>OrderHistoryPage</p>
+      <p>Profile Page</p>
       <button onClick={handleCheckToken}>Check Login</button>
       <Outlet />
     </>

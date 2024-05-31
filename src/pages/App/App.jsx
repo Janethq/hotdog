@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import { getUser } from "../../utilities/users-service";
 import AuthPage from "../AuthPage/AuthPage";
-import NewOrderPage from "../NewOrderPage/NewOrderPage";
-import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
+import Appointments from "../Appointments/Appointments";
+import Profile from "../Profile/Profile";
 
 const log = debug("mern:pages:App:App");
 
@@ -27,13 +27,8 @@ function App() {
         <NavBar setUser={setUser} />
 
         <Routes>
-          <Route path="/orders" element={<OrderHistoryPage />} />
-          <Route path="/orders/new" element={<NewOrderPage />} />
-
-          <Route path="/orders2" element={<OrderHistoryPage />}>
-            <Route path="new" element={<NewOrderPage />} />
-            <Route path="simon" element={<p>Simon</p>} />
-          </Route>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/appointments" element={<Appointments />} />
         </Routes>
       </main>
     </>

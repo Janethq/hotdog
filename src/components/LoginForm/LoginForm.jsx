@@ -14,8 +14,8 @@ export default function LoginForm({ setUser }) {
     const data = Object.fromEntries(formData);
 
     log("data: %o", data);
-    const { email, password } = data;
-    const user = await login(email, password);
+    const { username, password } = data;
+    const user = await login(username, password);
     setUser(user);
     navigate("/orders");
   };
@@ -26,8 +26,8 @@ export default function LoginForm({ setUser }) {
         <legend>Login</legend>
 
         <label>
-          Email:
-          <input name="email" />
+          username:
+          <input name="username" />
         </label>
         <br />
 

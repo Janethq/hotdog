@@ -22,7 +22,7 @@ const userSchema = new Schema(
     },
     dogName: { type: String },
     breed: { type: String },
-    weight: { type: String },
+    weight: { type: Number },
     companyName: { type: String },
     address: { type: String },
     service: { type: String },
