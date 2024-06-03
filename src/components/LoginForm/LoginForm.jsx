@@ -1,6 +1,7 @@
 import debug from "debug";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utilities/users-service";
+import "tailwindcss/tailwind.css";
 
 const log = debug("mern:components:LoginForm");
 
@@ -21,22 +22,33 @@ export default function LoginForm({ setUser }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <fieldset>
-        <legend>Login</legend>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200"
+    >
+      <fieldset className="mb-6">
+        <legend className="text-xl font-bold mb-4">Login</legend>
 
-        <label>
+        <label className="block text-gray-700 font-bold mb-2">
           username:
-          <input name="username" />
+          <input
+            name="username"
+            className="w-full p-2 border border-gray-400 rounded-md"
+          />
         </label>
         <br />
 
-        <label>
+        <label className="block text-gray-700 font-bold mb-2">
           Password:
-          <input name="password" />
+          <input
+            name="password"
+            className="w-full p-2 border border-gray-400 rounded-md"
+          />
         </label>
         <br />
-        <button>Login</button>
+        <button className="w-full p-2 bg-blue-500 text-white rounded-md">
+          Login
+        </button>
       </fieldset>
     </form>
   );

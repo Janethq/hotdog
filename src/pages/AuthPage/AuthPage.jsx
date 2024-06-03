@@ -13,7 +13,11 @@ export default function AuthPage({ setUser }) {
   return (
     <>
       <LoginForm setUser={setUser} />
-      <select name="loginType" onChange={handleLoginTypeChange}>
+      <select
+        name="loginType"
+        onChange={handleLoginTypeChange}
+        className="w-48 mx-auto p-2 pl-10 text-sm text-gray-700"
+      >
         <option value="">Select Registration type</option>
         <option value="dogOwner">Dog Owner</option>
         <option value="vendor">Vendor</option>

@@ -39,82 +39,88 @@ export default class VendorSignUpForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <fieldset>
-          <legend>SignUp</legend>
+      <form
+        onSubmit={this.handleSubmit}
+        className="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
+      >
+        <fieldset className="mb-4">
+          <legend className="text-lg font-bold mb-2">Sign Up</legend>
 
-          <label>
+          <label className="block mb-2">
             Name:
             <input
               name="name"
               value={this.state.name}
               onChange={this.handleChange}
+              className="w-full p-2 pl-10 text-sm text-gray-700"
             />
           </label>
-          <br />
 
-          <label>
+          <label className="block mb-2">
             Company Name:
             <input
               name="companyName"
               value={this.state.companyName}
               onChange={this.handleChange}
+              className="w-full p-2 pl-10 text-sm text-gray-700"
             />
           </label>
-          <br />
 
-          <label>
+          <label className="block mb-2">
             Service:
             <input
               name="service"
               value={this.state.service}
               onChange={this.handleChange}
+              className="w-full p-2 pl-10 text-sm text-gray-700"
             />
           </label>
-          <br />
 
-          <label>
+          <label className="block mb-2">
             Address:
             <input
               name="address"
               value={this.state.address}
               onChange={this.handleChange}
+              className="w-full p-2 pl-10 text-sm text-gray-700"
             />
           </label>
-          <br />
 
-          <label>
+          <label className="block mb-2">
             Username:
             <input
               name="username"
               value={this.state.username}
               onChange={this.handleChange}
+              className="w-full p-2 pl-10 text-sm text-gray-700"
             />
           </label>
-          <br />
 
-          <label>
+          <label className="block mb-2">
             Password:
             <input
               name="password"
               value={this.state.password}
               onChange={this.handleChange}
+              className="w-full p-2 pl-10 text-sm text-gray-700"
             />
           </label>
-          <br />
 
-          <label>
+          <label className="block mb-2">
             Confirm:
             <input
               name="confirm"
               value={this.state.confirm}
               onChange={this.handleChange}
+              className="w-full p-2 pl-10 text-sm text-gray-700"
             />
           </label>
-          <br />
 
-          <button>Sign Up</button>
-          <p>{this.state.error} </p>
+          <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+            Sign Up
+          </button>
+
+          <p className="text-red-500">{this.state.error}</p>
         </fieldset>
       </form>
     );
