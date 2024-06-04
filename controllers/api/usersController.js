@@ -21,6 +21,10 @@ const create = async (req, res) => {
     weight,
   } = req.body;
 
+  if (!username) {
+    return res.status(400).json({ error: "Username is required" });
+  }
+
   try {
     const user = await User.create({
       name,
@@ -43,8 +47,8 @@ const create = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
 
   if (user === null) {
     res.status(401).json({ msg: "User not found" });

@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import { getUser } from "../../utilities/users-service";
 import AuthPage from "../AuthPage/AuthPage";
 import Appointments from "../Appointments/Appointments";
-import Profile from "../Profile/Profile";
+import ProfileSection from "../../components/ProfileSection/ProfileSection";
 import AddAppointment from "../../components/AddForm/AddAppointment";
 import AddSlot from "../../components/AddForm/AddSlot";
 
@@ -25,16 +25,17 @@ function App() {
 
   return (
     <>
-      <main className="App">
+      <div className="flex h-screen">
         <NavBar setUser={setUser} />
-
-        <Routes>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/addappt" element={<AddAppointment />} />
-          <Route path="/addslot" element={<AddSlot />} />
-        </Routes>
-      </main>
+        <main className="flex-1 p-6">
+          <Routes>
+            <Route path="/profile" element={<ProfileSection />} />
+            <Route path="/appointments" element={<Appointments />} />
+            <Route path="/addappt" element={<AddAppointment />} />
+            <Route path="/addslot" element={<AddSlot />} />
+          </Routes>
+        </main>
+      </div>
     </>
   );
 }
