@@ -29,7 +29,7 @@ function App() {
         <NavBar setUser={setUser} />
         <main className="flex-1 p-6">
           <Routes>
-            <Route path="/profile" element={<ProfileSection />} />
+            <Route path="/profile" element={<ProfileSection user={user} />} />
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/addappt" element={<AddAppointment />} />
             <Route path="/addslot" element={<AddSlot />} />
