@@ -30,7 +30,7 @@ export default function LoginForm({ setUser }) {
         <legend className="text-xl font-bold mb-4">Login</legend>
 
         <label className="block text-gray-700 font-bold mb-2">
-          username:
+          Username:
           <input
             name="username"
             className="w-full p-2 border border-gray-400 rounded-md"

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "tailwindcss/tailwind.css";
 
 const ProfileSection = ({ user }) => {
   const [profileData, setProfileData] = useState(null);
@@ -64,159 +65,191 @@ const ProfileSection = ({ user }) => {
 
   return (
     <>
-      <h2>Profile Details</h2>
-      <div>
-            <label>Name: </label>
-            {editing ? (
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.name}</span>
-            )}
-          </div>
-      {user.type === "owner" ? (
-        <>
-          <div>
-            <label>Dog Name: </label>
-            {editing ? (
-              <input
-                type="text"
-                name="dogName"
-                value={formData.dogName}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.dogName}</span>
-            )}
-          </div>
-          <div>
-            <label>Breed: </label>
-            {editing ? (
-              <input
-                type="text"
-                name="breed"
-                value={formData.breed}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.breed}</span>
-            )}
-          </div>
-          <div>
-            <label>Weight: </label>
-            {editing ? (
-              <input
-                type="number"
-                name="weight"
-                value={formData.weight}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.weight} kg</span>
-            )}
-          </div>
-        </>
-      ) : 
-      // vendor data here if user type !== "owner" 
-      (
-        <>
-          <div>
-            <label>Company Name: </label>
-            {editing ? (
-              <input
-                type="text"
-                name="companyName"
-                value={formData.companyName}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.companyName}</span>
-            )}
-          </div>
-          <div>
-            <label>Service: </label>
-            {editing ? (
-              <input
-                type="text"
-                name="service"
-                value={formData.service}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.service}</span>
-            )}
-          </div>
-          <div>
-            <label>Address: </label>
-            {editing ? (
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.address}</span>
-            )}
-          </div>
-          <div>
-            <label>Opening Hours (Start): </label>
-            {editing ? (
-              <input
-                type="time"
-                name="openingHoursStart"
-                value={formData.openingHoursStart}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.openingHoursStart}</span>
-            )}
-          </div>
-          <div>
-            <label>Opening Hours (End): </label>
-            {editing ? (
-              <input
-                type="time"
-                name="openingHoursEnd"
-                value={formData.openingHoursEnd}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.openingHoursEnd}</span>
-            )}
-          </div>
-          <div>
-            <label>Service Duration (hours): </label>
-            {editing ? (
-              <input
-                type="number"
-                name="serviceDuration"
-                value={formData.serviceDuration}
-                onChange={handleChange}
-              />
-            ) : (
-              <span>{profileData.serviceDuration}</span>
-            )}
-          </div>
-        </>
-      )}
-      <div>
-        <label>Username: </label>
-        <span>{profileData.username}</span>
+      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4">Profile Details</h2>
+        <div className="mb-4">
+          <label className="block font-semibold">Name: </label>
+          {editing ? (
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            />
+          ) : (
+            <span className="mt-1 block">{profileData.name}</span>
+          )}
+        </div>
+        {user.type === "owner" ? (
+          <>
+            <div className="mb-4">
+              <label className="block font-semibold">Dog Name: </label>
+              {editing ? (
+                <input
+                  type="text"
+                  name="dogName"
+                  value={formData.dogName}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                />
+              ) : (
+                <span className="mt-1 block">{profileData.dogName}</span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block font-semibold">Breed: </label>
+              {editing ? (
+                <input
+                  type="text"
+                  name="breed"
+                  value={formData.breed}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                />
+              ) : (
+                <span className="mt-1 block">{profileData.breed}</span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block font-semibold">Weight: </label>
+              {editing ? (
+                <input
+                  type="number"
+                  name="weight"
+                  value={formData.weight}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                />
+              ) : (
+                <span className="mt-1 block">{profileData.weight} kg</span>
+              )}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="mb-4">
+              <label className="block font-semibold">Company Name: </label>
+              {editing ? (
+                <input
+                  type="text"
+                  name="companyName"
+                  value={formData.companyName}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                />
+              ) : (
+                <span className="mt-1 block">{profileData.companyName}</span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block font-semibold">Service: </label>
+              {editing ? (
+                <input
+                  type="text"
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                />
+              ) : (
+                <span className="mt-1 block">{profileData.service}</span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block font-semibold">Address: </label>
+              {editing ? (
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                />
+              ) : (
+                <span className="mt-1 block">{profileData.address}</span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block font-semibold">
+                Opening Hours (Start):{" "}
+              </label>
+              {editing ? (
+                <input
+                  type="time"
+                  name="openingHoursStart"
+                  value={formData.openingHoursStart}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                />
+              ) : (
+                <span className="mt-1 block">
+                  {profileData.openingHoursStart}
+                </span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block font-semibold">
+                Opening Hours (End):{" "}
+              </label>
+              {editing ? (
+                <input
+                  type="time"
+                  name="openingHoursEnd"
+                  value={formData.openingHoursEnd}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                />
+              ) : (
+                <span className="mt-1 block">
+                  {profileData.openingHoursEnd}
+                </span>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block font-semibold">
+                Service Duration (hours):{" "}
+              </label>
+              {editing ? (
+                <input
+                  type="number"
+                  name="serviceDuration"
+                  value={formData.serviceDuration}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                />
+              ) : (
+                <span className="mt-1 block">
+                  {profileData.serviceDuration}
+                </span>
+              )}
+            </div>
+          </>
+        )}
+        <div className="mb-4">
+          <label className="block font-semibold">Username: </label>
+          <span className="mt-1 block">{profileData.username}</span>
+        </div>
+        <div className="mb-4">
+          <label className="block font-semibold">Password: </label>
+          <span className="mt-1 block">******</span>
+        </div>
+        {editing ? (
+          <button
+            onClick={handleSave}
+            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            onClick={handleEdit}
+            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            Edit
+          </button>
+        )}
       </div>
-      <div>
-        <label>Password: </label>
-        <span>******</span>
-      </div>
-      {editing ? (
-        <button onClick={handleSave}>Save</button>
-      ) : (
-        <button onClick={handleEdit}>Edit</button>
-      )}
     </>
   );
 };
