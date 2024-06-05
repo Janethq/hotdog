@@ -14,7 +14,10 @@ export default class VendorSignUpForm extends Component {
     password: "",
     confirm: "",
     error: "",
-    type: "vendor"
+    type: "vendor",
+    openingHoursStart: "",
+    openingHoursEnd: "",
+    serviceDuration: "",
   };
 
   handleChange = (event) => {
@@ -86,6 +89,57 @@ export default class VendorSignUpForm extends Component {
               className="w-full p-2 pl-10 text-sm text-gray-700"
             />
           </label>
+
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="openingHoursStart"
+            >
+              Opening Hours (Start):
+            </label>
+            <input
+              type="time"
+              name="openingHoursStart"
+              id="openingHoursStart"
+              value={this.state.openingHoursStart}
+              onChange={this.handleChange}
+              className="w-full p-2 border border-gray-400 rounded-md"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="openingHoursEnd"
+            >
+              Opening Hours (End):
+            </label>
+            <input
+              type="time"
+              name="openingHoursEnd"
+              id="openingHoursEnd"
+              value={this.state.openingHoursEnd}
+              onChange={this.handleChange}
+              className="w-full p-2 border border-gray-400 rounded-md"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="serviceDuration"
+            >
+              Service Duration (hours):
+            </label>
+            <input
+              type="number"
+              name="serviceDuration"
+              id="serviceDuration"
+              value={this.state.serviceDuration}
+              onChange={this.handleChange}
+              className="w-full p-2 border border-gray-400 rounded-md"
+            />
+          </div>
 
           <label className="block mb-2">
             Username:
