@@ -1,9 +1,40 @@
-import "tailwindcss/tailwind.css";
+import { useState } from "react";
 
 export default function AddAppointment() {
-  //for dog owners
-  const handleSubmit = () => {
-    // Handle form submission
+  const [formData, setFormData] = useState({
+    service: "", // Initial state can be empty or a default value
+    date: "",
+    time: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/owner/newappt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          service: formData.service,
+          ApptDate: formData.date,
+          ApptTime: formData.time,
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Appointment created:", data);
+      } else {
+        const errorData = await response.json();
+        console.error("Error creating appointment:", errorData);
+      }
+    } catch (error) {
+      console.error("Error creating appointment:", error);
+    }
   };
 
   return (
@@ -24,7 +55,14 @@ export default function AddAppointment() {
             name="service"
             id="service"
             className="w-full p-2 border border-gray-400 rounded-md"
+            onChange={handleChange}
+            value={formData.service}
+            required
           >
+            <option value="" disabled>
+              Select a service
+            </option>{" "}
+            {/* Add this line */}
             <option value="grooming">Grooming</option>
             <option value="vet">Vet visit</option>
             <option value="agility">Agility class</option>
@@ -41,6 +79,9 @@ export default function AddAppointment() {
             name="date"
             id="date"
             className="w-full p-2 border border-gray-400 rounded-md"
+            onChange={handleChange}
+            value={formData.date}
+            required
           />
         </div>
         <div className="mb-4">
@@ -52,6 +93,9 @@ export default function AddAppointment() {
             name="time"
             id="time"
             className="w-full p-2 border border-gray-400 rounded-md"
+            onChange={handleChange}
+            value={formData.time}
+            required
           />
         </div>
         <button
