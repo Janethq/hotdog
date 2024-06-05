@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { logOut } from "../../utilities/users-service";
 
-export default function NavBar({ setUser }) {
+export default function NavBar({ user, setUser }) {
   const handleLogOut = () => {
     logOut();
     setUser(null);
@@ -15,7 +15,6 @@ export default function NavBar({ setUser }) {
       >
         Profile
       </NavLink>
-      {/* orderhistory */}
       <div className="h-px bg-gray-700"></div>
       <NavLink
         to="/appointments"
@@ -23,8 +22,18 @@ export default function NavBar({ setUser }) {
       >
         Appointments
       </NavLink>
-      {/* newORder */}
       <div className="h-px bg-gray-700"></div>
+      {user && user.type === "owner" && (
+        <>
+          <NavLink
+            to="/addappt"
+            className="py-2 px-4 hover:bg-gray-700 hover:text-white transition duration-300"
+          >
+            Add Appointment
+          </NavLink>
+          <div className="h-px bg-gray-700"></div>
+        </>
+      )}
       <Link
         to=""
         onClick={handleLogOut}

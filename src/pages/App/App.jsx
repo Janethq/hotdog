@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       <div className="flex h-screen">
-        <NavBar setUser={setUser} />
+        <NavBar user={user} setUser={setUser} />
         <main className="flex-1 p-6">
           <Routes>
             <Route path="/profile" element={<ProfileSection user={user} />} />
