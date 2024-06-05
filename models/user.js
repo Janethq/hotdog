@@ -29,7 +29,7 @@ const userSchema = new Schema(
     type: { type: String },
     openingHoursStart: { type: String },
     openingHoursEnd: { type: String },
-    serviceDuration: { type: Number },
+    serviceDuration: { type: Number , min: 1, },
   },
   {
     timestamps: true,

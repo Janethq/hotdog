@@ -42,6 +42,7 @@ export default function LoginForm({ setUser }) {
           Password:
           <input
             name="password"
+            type="password"
             className="w-full p-2 border border-gray-400 rounded-md"
           />
         </label>

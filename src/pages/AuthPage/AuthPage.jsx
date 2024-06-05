@@ -11,20 +11,22 @@ export default function AuthPage({ setUser }) {
   };
 
   return (
-    <>
-      <LoginForm setUser={setUser} />
-      <select
-        name="loginType"
-        onChange={handleLoginTypeChange}
-        className="w-48 mx-auto p-2 pl-10 text-sm text-gray-700"
-      >
-        <option value="">Select Registration type</option>
-        <option value="dogOwner">Dog Owner</option>
-        <option value="vendor">Vendor</option>
-      </select>
-      {/* if select dog owner, the dog owner signup form will render */}
+    <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center space-y-4">
+        <LoginForm setUser={setUser} />
+        <select
+          name="loginType"
+          onChange={handleLoginTypeChange}
+          className="w-48 p-2 text-sm text-gray-700 border border-gray-300 rounded-md"
+        >
+          <option value="">Select Registration type</option>
+          <option value="dogOwner">Dog Owner</option>
+          <option value="vendor">Vendor</option>
+        </select>
+      </div>
+      {/* Render signup forms based on loginType */}
       {loginType === "dogOwner" && <DogOwnerSignUpForm setUser={setUser} />}
       {loginType === "vendor" && <VendorSignUpForm setUser={setUser} />}
-    </>
+    </div>
   );
 }
