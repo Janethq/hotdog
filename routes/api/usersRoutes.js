@@ -8,5 +8,6 @@ router.post("/", usersCtrl.create);
 router.post("/login", usersCtrl.login);
 router.get("/check-token", ensureLoggedIn, usersCtrl.checkToken);
 router.get("/:username", usersCtrl.readByUsername); 
+router.patch("/:username", usersCtrl.update);
 
 module.exports = router;
