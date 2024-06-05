@@ -66,57 +66,105 @@ const ProfileSection = ({ user }) => {
     <>
       <h2>Profile Details</h2>
       <div>
-        <label>Name: </label>
-        {editing ? (
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        ) : (
-          <span>{profileData.name}</span>
-        )}
-      </div>
-      <div>
-        <label>Dog Name: </label>
-        {editing ? (
-          <input
-            type="text"
-            name="dogName"
-            value={formData.dogName}
-            onChange={handleChange}
-          />
-        ) : (
-          <span>{profileData.dogName}</span>
-        )}
-      </div>
-      <div>
-        <label>Breed: </label>
-        {editing ? (
-          <input
-            type="text"
-            name="breed"
-            value={formData.breed}
-            onChange={handleChange}
-          />
-        ) : (
-          <span>{profileData.breed}</span>
-        )}
-      </div>
-      <div>
-        <label>Weight: </label>
-        {editing ? (
-          <input
-            type="number"
-            name="weight"
-            value={formData.weight}
-            onChange={handleChange}
-          />
-        ) : (
-          <span>{profileData.weight} kg</span>
-        )}
-      </div>
+            <label>Name: </label>
+            {editing ? (
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.name}</span>
+            )}
+          </div>
+      {user.type === "owner" ? (
+        <>
+          <div>
+            <label>Dog Name: </label>
+            {editing ? (
+              <input
+                type="text"
+                name="dogName"
+                value={formData.dogName}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.dogName}</span>
+            )}
+          </div>
+          <div>
+            <label>Breed: </label>
+            {editing ? (
+              <input
+                type="text"
+                name="breed"
+                value={formData.breed}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.breed}</span>
+            )}
+          </div>
+          <div>
+            <label>Weight: </label>
+            {editing ? (
+              <input
+                type="number"
+                name="weight"
+                value={formData.weight}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.weight} kg</span>
+            )}
+          </div>
+        </>
+      ) : 
+      // vendor data here if user type !== "owner" 
+      (
+        <>
+          <div>
+            <label>Company Name: </label>
+            {editing ? (
+              <input
+                type="text"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.companyName}</span>
+            )}
+          </div>
+          <div>
+            <label>Service: </label>
+            {editing ? (
+              <input
+                type="text"
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.service}</span>
+            )}
+          </div>
+          <div>
+            <label>Address: </label>
+            {editing ? (
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.address}</span>
+            )}
+          </div>
+        </>
+      )}
       <div>
         <label>Username: </label>
         <span>{profileData.username}</span>
@@ -133,5 +181,4 @@ const ProfileSection = ({ user }) => {
     </>
   );
 };
-
 export default ProfileSection;

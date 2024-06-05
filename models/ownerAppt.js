@@ -8,6 +8,7 @@ const ownerApptSchema = new Schema(
     dogName: { type: String },
     breed: { type: String },
     weight: { type: Number },
+    type: "owner",
   },
   {
     timestamps: true,

@@ -26,6 +26,7 @@ const userSchema = new Schema(
     companyName: { type: String },
     address: { type: String },
     service: { type: String },
+    type: { type: String },
   },
   {
     timestamps: true,
@@ -37,6 +38,17 @@ const userSchema = new Schema(
     },
   }
 );
+
+//middleware to set the user type based on what fields I have
+userSchema.pre("save", function (next) {
+  if (this.dogName && this.breed && this.weight) {
+    this.type = "owner";
+  } else if (this.companyName && this.address && this.service) {
+    this.type = "vendor";
+  }
+  next();
+});
+
 
 userSchema.pre("save", async function (next) {
   // 'this' is the user doc

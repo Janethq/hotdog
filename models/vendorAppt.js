@@ -7,6 +7,7 @@ const vendorApptSchema = new Schema(
     companyName: { type: String },
     address: { type: String },
     service: { type: String },
+    type: "vendor",
   },
   {
     timestamps: true,

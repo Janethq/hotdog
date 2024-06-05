@@ -14,6 +14,7 @@ export default class DogOwnerSignUpForm extends Component {
     password: "",
     confirm: "",
     error: "",
+    type: "owner"
   };
 
   handleChange = (event) => {

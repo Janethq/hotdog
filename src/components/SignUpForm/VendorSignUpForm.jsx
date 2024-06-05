@@ -14,6 +14,7 @@ export default class VendorSignUpForm extends Component {
     password: "",
     confirm: "",
     error: "",
+    type: "vendor"
   };
 
   handleChange = (event) => {
