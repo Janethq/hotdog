@@ -27,6 +27,9 @@ const userSchema = new Schema(
     address: { type: String },
     service: { type: String },
     type: { type: String },
+    openingHoursStart: { type: String },
+    openingHoursEnd: { type: String },
+    serviceDuration: { type: Number },
   },
   {
     timestamps: true,
@@ -43,7 +46,7 @@ const userSchema = new Schema(
 userSchema.pre("save", function (next) {
   if (this.dogName && this.breed && this.weight) {
     this.type = "owner";
-  } else if (this.companyName && this.address && this.service) {
+  } else if (this.companyName && this.address && this.service && this.openingHoursStart && this.openingHoursEnd && this.serviceDuration) {
     this.type = "vendor";
   }
   next();

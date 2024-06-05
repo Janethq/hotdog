@@ -19,6 +19,9 @@ const create = async (req, res) => {
     dogName,
     breed,
     weight,
+    openingHoursStart,
+    openingHoursEnd,
+    serviceDuration,
   } = req.body;
 
   if (!username) {
@@ -36,6 +39,9 @@ const create = async (req, res) => {
       dogName,
       breed,
       weight,
+      openingHoursStart,
+      openingHoursEnd,
+      serviceDuration,
     });
     debug("user: %o", user);
     const token = createJWT(user);

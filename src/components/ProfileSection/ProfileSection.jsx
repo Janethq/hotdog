@@ -163,6 +163,45 @@ const ProfileSection = ({ user }) => {
               <span>{profileData.address}</span>
             )}
           </div>
+          <div>
+            <label>Opening Hours (Start): </label>
+            {editing ? (
+              <input
+                type="time"
+                name="openingHoursStart"
+                value={formData.openingHoursStart}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.openingHoursStart}</span>
+            )}
+          </div>
+          <div>
+            <label>Opening Hours (End): </label>
+            {editing ? (
+              <input
+                type="time"
+                name="openingHoursEnd"
+                value={formData.openingHoursEnd}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.openingHoursEnd}</span>
+            )}
+          </div>
+          <div>
+            <label>Service Duration (hours): </label>
+            {editing ? (
+              <input
+                type="number"
+                name="serviceDuration"
+                value={formData.serviceDuration}
+                onChange={handleChange}
+              />
+            ) : (
+              <span>{profileData.serviceDuration}</span>
+            )}
+          </div>
         </>
       )}
       <div>

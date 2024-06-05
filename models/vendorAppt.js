@@ -8,6 +8,9 @@ const vendorApptSchema = new Schema(
     address: { type: String },
     service: { type: String },
     type: "vendor",
+    openingHoursStart: { type: String },
+    openingHoursEnd: { type: String },
+    serviceDuration: { type: Number },
   },
   {
     timestamps: true,
