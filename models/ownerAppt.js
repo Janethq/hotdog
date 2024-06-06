@@ -7,11 +7,11 @@ const Schema = mongoose.Schema;
 
 const ownerApptSchema = new Schema(
   {
-    service: { type: String, required: true },
+    serviceId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     ApptTime: { type: String, required: true },
     ApptDate: { type: String, required: true },
     type: { type: String, default: "owner" },
-    userId: { type: Schema.Types.ObjectId, ref: 'User' },
+    userId: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,

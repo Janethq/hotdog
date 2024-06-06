@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 export default function Appointments({ userId }) {
-  console.log(userId)
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,7 +39,6 @@ export default function Appointments({ userId }) {
       <h2 className="text-xl font-bold mb-4">Your Appointments</h2>
       <ul>
         {appointments.map((appt) => (
-          
           <li key={appt._id} className="mb-4">
             <p>
               <strong>Service:</strong> {appt.service}
@@ -52,6 +50,9 @@ export default function Appointments({ userId }) {
             <p>
               <strong>Time:</strong> {appt.ApptTime}
             </p>
+            <button>Edit</button>
+            <button>Save</button>
+            <button>Delete</button>
           </li>
         ))}
       </ul>

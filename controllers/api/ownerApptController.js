@@ -21,9 +21,9 @@ const create = async (req, res) => {
 };
 
 const getAppts = async (req, res) => {
-  console.log(req.params)
   try {
-    const ownerAppts = await OwnerAppt.find({ userId: req.params.id });
+    const ownerAppts = await OwnerAppt.find({ userId: req.params.id }).populate('userId').exec()
+    console.log(ownerAppts[0])
     res.json(ownerAppts);
   } catch (err) {
     res.status(500).json({ message: err.message });

@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function AddAppointment({userId}) {
+export default function AddAppointment({ userId }) {
   const [formData, setFormData] = useState({
     service: "", // Initial state can be empty or a default value
     date: "",
     time: "",
   });
+
+  useEffect(() => {
+    console.log(formData);
+    const { date, time } = formData;
+    console.log(date);
+    console.log(time);
+    const dt = `${date}T${time}`;
+    console.log(dt)
+    const dateObj = new Date(dt);
+    console.log(dateObj.toLocaleTimeString())
+  }, [formData]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +35,7 @@ export default function AddAppointment({userId}) {
           ApptDate: formData.date,
           ApptTime: formData.time,
           //userId: userId
-          userId
+          userId,
         }),
       });
       if (response.ok) {
@@ -64,7 +75,6 @@ export default function AddAppointment({userId}) {
             <option value="" disabled>
               Select a service
             </option>{" "}
-            {/* Add this line */}
             <option value="grooming">Grooming</option>
             <option value="vet">Vet visit</option>
             <option value="agility">Agility class</option>
