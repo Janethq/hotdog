@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { TimePicker, DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+
+const today = dayjs();
+const tomorrow = today.add(1, "day");
+const nextMonth = today.add(1, "month");
+const endOfNextMonth = nextMonth.endOf("month");
 
 export default function AddAppointment({ userId }) {
   const navigate = useNavigate();
   const [services, setServices] = useState([]);
   const [formData, setFormData] = useState({
     service: "", // Initial state can be empty or a default value
-    date: "",
+    date: today,
     time: "",
   });
+
 
   // useEffect(() => {
   //   console.log(formData);
@@ -42,6 +50,7 @@ export default function AddAppointment({ userId }) {
   }, []);
 
   const handleChange = (e) => {
+    console.log(e.$d);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -75,6 +84,8 @@ export default function AddAppointment({ userId }) {
       console.error("Error creating appointment:", error);
     }
   };
+
+  useEffect(() => console.log(formData), [formData]);
 
   return (
     <form
@@ -112,28 +123,32 @@ export default function AddAppointment({ userId }) {
           <label className="block text-gray-700 font-bold mb-2" htmlFor="date">
             Date:
           </label>
-          <input
-            type="date"
+          <DatePicker
+            className="w-full p-2 border border-gray-400 rounded-md"
             name="date"
             id="date"
-            className="w-full p-2 border border-gray-400 rounded-md"
-            onChange={handleChange}
-            value={formData.date}
-            required
+            defaultValue={today}
+            minDate={tomorrow}
+            maxDate={endOfNextMonth}
+            onChange={(datePicked) =>
+              //use dayjs package to format date picked and then format to yyyy-mm-dd
+              setFormData({ ...formData, date: dayjs(datePicked.$d).format('YYYY-MM-DD') })
+            }
+            format="YYYY-MM-DD"
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="time">
             Time:
           </label>
-          <input
-            type="time"
+
+          <TimePicker
             name="time"
             id="time"
-            className="w-full p-2 border border-gray-400 rounded-md"
-            onChange={handleChange}
-            value={formData.time}
-            required
+            // as long as not 0 and not 30, disable
+            shouldDisableTime={(value, view) => view === 'minutes' && (value.minute() !== 0 && value.minute() !== 30) }
+            onChange={(timePicked) => setFormData({ ...formData, time: dayjs(timePicked.$d).format('HH:mm') })}
+            format="HH:mm"
           />
         </div>
         <button

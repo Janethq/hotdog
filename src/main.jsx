@@ -2,13 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./pages/App/App.jsx";
 import { BrowserRouter } from "react-router-dom";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 
 localStorage.debug = "mern:*";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <App />
+      </LocalizationProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
