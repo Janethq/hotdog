@@ -91,14 +91,26 @@ export default function Appointments({ userId }) {
          {editing === appt._id ? (
            <div>
              <p>
-               <strong>Service:</strong> {appt.service}
+               <strong>Service:</strong> {appt.serviceId.service}
+             </p>
+             <p>
+               <strong>Address:</strong> {appt.serviceId.address}
+             </p>
+             <p>
+               <strong>Operating Hours:</strong>{" "}
+               {appt.serviceId.openingHoursStart} -{" "}
+               {appt.serviceId.openingHoursEnd}
+             </p>
+             <p>
+               <strong>Service Duration:</strong>{" "}
+               {appt.serviceId.serviceDuration}
              </p>
              <p>
                <strong>Date:</strong>{" "}
                <input
                  type="date"
-                 name="ApptDate"
-                 value={formData.ApptDate}
+                 name="apptDate"
+                 value={formData.apptDate}
                  onChange={handleChange}
                  required
                />
@@ -107,8 +119,8 @@ export default function Appointments({ userId }) {
                <strong>Time:</strong>{" "}
                <input
                  type="time"
-                 name="ApptTime"
-                 value={formData.ApptTime}
+                 name="apptTime"
+                 value={formData.apptTime}
                  onChange={handleChange}
                  required
                />
@@ -129,14 +141,26 @@ export default function Appointments({ userId }) {
          ) : (
            <div>
              <p>
-               <strong>Service:</strong> {appt.service}
+               <strong>Service:</strong> {appt.serviceId.service}
+             </p>
+             <p>
+               <strong>Address:</strong> {appt.serviceId.address}
+             </p>
+             <p>
+               <strong>Operating Hours:</strong>{" "}
+               {appt.serviceId.openingHoursStart} -{" "}
+               {appt.serviceId.openingHoursEnd}
+             </p>
+             <p>
+               <strong>Service Duration:</strong>{" "}
+               {appt.serviceId.serviceDuration}
              </p>
              <p>
                <strong>Date:</strong>{" "}
-               {new Date(appt.ApptDate).toLocaleDateString()}
+               {new Date(appt.apptDate).toLocaleDateString()}
              </p>
              <p>
-               <strong>Time:</strong> {appt.ApptTime}
+               <strong>Time:</strong> {appt.apptTime}
              </p>
              <button
                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2"
