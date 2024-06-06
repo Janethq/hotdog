@@ -54,9 +54,24 @@ const updateAppts = async (req, res) => {
   }
 };
 
+const delAppts = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const ownerAppts = await OwnerAppt.findByIdAndDelete(id);
+    if (!ownerAppts) {
+      return res.status(404).send({ message: "Appointment not found" });
+    }
+    res.send(ownerAppts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Error deleting appointment" });
+  }
+};
+
 module.exports = {
   create,
   getAppts,
   isAuthenticated,
   updateAppts,
+  delAppts,
 };
