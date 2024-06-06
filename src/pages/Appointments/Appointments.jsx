@@ -83,59 +83,77 @@ export default function Appointments({ userId }) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  return (
-    <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
-      <h2 className="text-xl font-bold mb-4">Your Appointments</h2>
-      <ul>
-        {appointments.map((appt) => (
-          <li key={appt._id} className="mb-4">
-            {editing === appt._id ? (
-              <div>
-                <p>
-                  <strong>Service:</strong> {appt.service}
-                </p>
-                <p>
-                  <strong>Date:</strong>{" "}
-                  <input
-                    type="date"
-                    name="ApptDate"
-                    value={formData.ApptDate}
-                    onChange={handleChange}
-                    required
-                  />
-                </p>
-                <p>
-                  <strong>Time:</strong>{" "}
-                  <input
-                    type="time"
-                    name="ApptTime"
-                    value={formData.ApptTime}
-                    onChange={handleChange}
-                    required
-                  />
-                </p>
-                <button onClick={() => handleSave(appt._id)}>Save</button>
-                <button onClick={() => setEditing(null)}>Cancel</button>
-              </div>
-            ) : (
-              <div>
-                <p>
-                  <strong>Service:</strong> {appt.service}
-                </p>
-                <p>
-                  <strong>Date:</strong>{" "}
-                  {new Date(appt.ApptDate).toLocaleDateString()}
-                </p>
-                <p>
-                  <strong>Time:</strong> {appt.ApptTime}
-                </p>
-                <button onClick={() => handleEdit(appt._id)}>Edit</button>
-                <button onClick={() => handleDelete(appt._id)}>Delete</button>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+ return (
+   <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
+     <h2 className="text-xl font-bold mb-4">Your Appointments</h2>
+     {appointments.map((appt) => (
+       <section key={appt._id} className="mb-4 p-4 border-b border-gray-200">
+         {editing === appt._id ? (
+           <div>
+             <p>
+               <strong>Service:</strong> {appt.service}
+             </p>
+             <p>
+               <strong>Date:</strong>{" "}
+               <input
+                 type="date"
+                 name="ApptDate"
+                 value={formData.ApptDate}
+                 onChange={handleChange}
+                 required
+               />
+             </p>
+             <p>
+               <strong>Time:</strong>{" "}
+               <input
+                 type="time"
+                 name="ApptTime"
+                 value={formData.ApptTime}
+                 onChange={handleChange}
+                 required
+               />
+             </p>
+             <button
+               className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2"
+               onClick={() => handleSave(appt._id)}
+             >
+               Save
+             </button>
+             <button
+               className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+               onClick={() => setEditing(null)}
+             >
+               Cancel
+             </button>
+           </div>
+         ) : (
+           <div>
+             <p>
+               <strong>Service:</strong> {appt.service}
+             </p>
+             <p>
+               <strong>Date:</strong>{" "}
+               {new Date(appt.ApptDate).toLocaleDateString()}
+             </p>
+             <p>
+               <strong>Time:</strong> {appt.ApptTime}
+             </p>
+             <button
+               className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2"
+               onClick={() => handleEdit(appt._id)}
+             >
+               Edit
+             </button>
+             <button
+               className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+               onClick={() => handleDelete(appt._id)}
+             >
+               Delete
+             </button>
+           </div>
+         )}
+       </section>
+     ))}
+   </div>
+ );
 }
