@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function AddAppointment({ userId }) {
   const [formData, setFormData] = useState({
@@ -7,16 +7,16 @@ export default function AddAppointment({ userId }) {
     time: "",
   });
 
-  useEffect(() => {
-    console.log(formData);
-    const { date, time } = formData;
-    console.log(date);
-    console.log(time);
-    const dt = `${date}T${time}`;
-    console.log(dt)
-    const dateObj = new Date(dt);
-    console.log(dateObj.toLocaleTimeString())
-  }, [formData]);
+  // useEffect(() => {
+  //   console.log(formData);
+  //   const { date, time } = formData;
+  //   console.log(date);
+  //   console.log(time);
+  //   const dt = `${date}T${time}`;
+  //   console.log(dt)
+  //   const dateObj = new Date(dt);
+  //   console.log(dateObj.toLocaleTimeString())
+  // }, [formData]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

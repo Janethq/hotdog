@@ -7,7 +7,8 @@ const Schema = mongoose.Schema;
 
 const ownerApptSchema = new Schema(
   {
-    serviceId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    // serviceId: { type: Schema.Types.ObjectId, ref: "User", required:true },
+    service: {type: String},
     ApptTime: { type: String, required: true },
     ApptDate: { type: String, required: true },
     type: { type: String, default: "owner" },

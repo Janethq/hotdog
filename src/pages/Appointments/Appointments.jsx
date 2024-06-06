@@ -27,7 +27,6 @@ export default function Appointments({ userId }) {
         setLoading(false);
       }
     };
-    // ok test if this works now//id is undefined screen shots~~ =P
     fetchAppointments();
   }, []);
 
