@@ -106,10 +106,34 @@ const update = async (req, res) => {
   }
 };
 
+const getAllServices = async (req, res) => {
+  try {
+    const users = await User.find({}); // Fetch all users
+    let services = [];
+    users.forEach((user) => {
+      if (user.service) {
+        // Check if the user has a service
+        const responseObj = {
+          serviceName: user.service,
+          serviceId: user._id,
+        };
+        services.push(responseObj); // Push the service to the array
+      }
+    });
+    // Remove duplicate services
+    services = Array.from(new Set(services));
+    res.json(services);
+  } catch (error) {
+    console.error("Error fetching services:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   create,
   login,
   checkToken,
   readByUsername,
   update,
+  getAllServices,
 };

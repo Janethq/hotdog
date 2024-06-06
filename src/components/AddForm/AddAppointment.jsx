@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddAppointment({ userId }) {
+  const navigate = useNavigate();
+  const [services, setServices] = useState([]);
   const [formData, setFormData] = useState({
     service: "", // Initial state can be empty or a default value
     date: "",
@@ -18,12 +21,34 @@ export default function AddAppointment({ userId }) {
   //   console.log(dateObj.toLocaleTimeString())
   // }, [formData]);
 
+  //fetch available service from mongooooo
+  //change state
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch("/api/users/services");
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setServices(data); // Update state with da services
+        } else {
+          console.error("Failed to fetch services");
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    };
+    fetchServices();
+  }, []);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
+    console.log(userId);
     try {
       const response = await fetch("/api/owners/newappt", {
         method: "POST",
@@ -31,9 +56,9 @@ export default function AddAppointment({ userId }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          service: formData.service,
-          ApptDate: formData.date,
-          ApptTime: formData.time,
+          serviceId: formData.service,
+          apptDate: formData.date,
+          apptTime: formData.time,
           //userId: userId
           userId,
         }),
@@ -41,6 +66,7 @@ export default function AddAppointment({ userId }) {
       if (response.ok) {
         const data = await response.json();
         console.log("Appointment created:", data);
+        navigate("/appointments");
       } else {
         const errorData = await response.json();
         console.error("Error creating appointment:", errorData);
@@ -74,12 +100,12 @@ export default function AddAppointment({ userId }) {
           >
             <option value="" disabled>
               Select a service
-            </option>{" "}
-            <option value="grooming">Grooming</option>
-            <option value="vet">Vet visit</option>
-            <option value="agility">Agility class</option>
-            <option value="obedience">Obedience training</option>
-            <option value="swim">Swim session</option>
+            </option>
+            {services.map((service) => (
+              <option key={service.serviceId} value={service.serviceId}>
+                {service.serviceName}
+              </option>
+            ))}
           </select>
         </div>
         <div className="mb-4">

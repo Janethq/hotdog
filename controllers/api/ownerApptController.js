@@ -3,13 +3,13 @@ const OwnerAppt = require("../../models/ownerAppt");
 
 const create = async (req, res) => {
   debug("body: %o", req.body);
-  const { service, ApptDate, ApptTime, userId } = req.body;
+  const { serviceId, apptDate, apptTime, userId } = req.body;
 
   try {
     const ownerAppt = await OwnerAppt.create({
-      service,
-      ApptTime,
-      ApptDate,
+      serviceId,
+      apptTime,
+      apptDate,
       userId,
     });
 
