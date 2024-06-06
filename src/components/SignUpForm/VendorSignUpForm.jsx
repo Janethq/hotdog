@@ -95,7 +95,7 @@ export default class VendorSignUpForm extends Component {
               className="block text-gray-700 font-bold mb-2"
               htmlFor="openingHoursStart"
             >
-              Opening Hours (Start):
+              Opening Hour:
             </label>
             <input
               type="time"
@@ -112,7 +112,7 @@ export default class VendorSignUpForm extends Component {
               className="block text-gray-700 font-bold mb-2"
               htmlFor="openingHoursEnd"
             >
-              Opening Hours (End):
+              Closing Hour:
             </label>
             <input
               type="time"

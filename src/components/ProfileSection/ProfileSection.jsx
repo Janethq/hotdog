@@ -127,6 +127,7 @@ const ProfileSection = ({ user }) => {
             </div>
           </>
         ) : (
+          //vendor form here onwards
           <>
             <div className="mb-4">
               <label className="block font-semibold">Company Name: </label>
@@ -172,7 +173,7 @@ const ProfileSection = ({ user }) => {
             </div>
             <div className="mb-4">
               <label className="block font-semibold">
-                Opening Hours (Start):{" "}
+                Opening hour:{" "}
               </label>
               {editing ? (
                 <input
@@ -190,7 +191,7 @@ const ProfileSection = ({ user }) => {
             </div>
             <div className="mb-4">
               <label className="block font-semibold">
-                Opening Hours (End):{" "}
+                Closing hour:{" "}
               </label>
               {editing ? (
                 <input

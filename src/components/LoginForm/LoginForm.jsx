@@ -1,3 +1,4 @@
+import { useState } from "react";
 import debug from "debug";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utilities/users-service";
@@ -7,6 +8,7 @@ const log = debug("mern:components:LoginForm");
 
 export default function LoginForm({ setUser }) {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,9 +18,14 @@ export default function LoginForm({ setUser }) {
 
     log("data: %o", data);
     const { username, password } = data;
-    const user = await login(username, password);
-    setUser(user);
-    navigate("/profile");
+
+    try {
+      const user = await login(username, password);
+      setUser(user);
+      navigate("/profile");
+    } catch (error) {
+      setErrorMessage("Login failed. Please check your username and password.");
+    }
   };
 
   return (
@@ -50,6 +57,7 @@ export default function LoginForm({ setUser }) {
         <button className="w-full p-2 bg-blue-500 text-white rounded-md">
           Login
         </button>
+        {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
       </fieldset>
     </form>
   );
