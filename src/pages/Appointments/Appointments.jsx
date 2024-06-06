@@ -4,6 +4,8 @@ export default function Appointments({ userId }) {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editing, setEditing] = useState(null);
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -30,6 +32,54 @@ export default function Appointments({ userId }) {
     fetchAppointments();
   }, []);
 
+  const handleEdit = (apptId) => {
+    setEditing(apptId);
+    const appt = appointments.find((appt) => appt._id === apptId);
+    setFormData(appt);
+  };
+
+  const handleSave = async (apptId) => {
+    try {
+      const response = await fetch(`/api/owners/appts/${apptId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to update appointment");
+      }
+      const updatedAppointments = appointments.map((appt) =>
+        appt._id === apptId ? formData : appt
+      );
+      setAppointments(updatedAppointments);
+      setEditing(null);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleDelete = async (apptId) => {
+    try {
+      const response = await fetch(`/api/owners/appts/${apptId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete appointment");
+      }
+      const updatedAppointments = appointments.filter(
+        (appt) => appt._id !== apptId
+      );
+      setAppointments(updatedAppointments);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -39,19 +89,50 @@ export default function Appointments({ userId }) {
       <ul>
         {appointments.map((appt) => (
           <li key={appt._id} className="mb-4">
-            <p>
-              <strong>Service:</strong> {appt.service}
-            </p>
-            <p>
-              <strong>Date:</strong>{" "}
-              {new Date(appt.ApptDate).toLocaleDateString()}
-            </p>
-            <p>
-              <strong>Time:</strong> {appt.ApptTime}
-            </p>
-            <button>Edit</button>
-            <button>Save</button>
-            <button>Delete</button>
+            {editing === appt._id ? (
+              <div>
+                <p>
+                  <strong>Service:</strong> {appt.service}
+                </p>
+                <p>
+                  <strong>Date:</strong>{" "}
+                  <input
+                    type="date"
+                    name="ApptDate"
+                    value={formData.ApptDate}
+                    onChange={handleChange}
+                    required
+                  />
+                </p>
+                <p>
+                  <strong>Time:</strong>{" "}
+                  <input
+                    type="time"
+                    name="ApptTime"
+                    value={formData.ApptTime}
+                    onChange={handleChange}
+                    required
+                  />
+                </p>
+                <button onClick={() => handleSave(appt._id)}>Save</button>
+                <button onClick={() => setEditing(null)}>Cancel</button>
+              </div>
+            ) : (
+              <div>
+                <p>
+                  <strong>Service:</strong> {appt.service}
+                </p>
+                <p>
+                  <strong>Date:</strong>{" "}
+                  {new Date(appt.ApptDate).toLocaleDateString()}
+                </p>
+                <p>
+                  <strong>Time:</strong> {appt.ApptTime}
+                </p>
+                <button onClick={() => handleEdit(appt._id)}>Edit</button>
+                <button onClick={() => handleDelete(appt._id)}>Delete</button>
+              </div>
+            )}
           </li>
         ))}
       </ul>

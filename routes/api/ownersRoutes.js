@@ -8,5 +8,6 @@ router.post("/newappt", ownerApptCtrl.create);
 
 // gets all appointments for a specific owner
 router.get("/appts/:id", ownerApptCtrl.getAppts);
+router.patch("/appts/:id", ownerApptCtrl.updateAppts);
 
 module.exports = router;

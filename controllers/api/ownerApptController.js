@@ -38,8 +38,25 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
+const updateAppts = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const ownerAppts = await OwnerAppt.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    if (!ownerAppts) {
+      return res.status(404).send({ message: "Appointment not found" });
+    }
+    res.send(ownerAppts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Error updating appointment" });
+  }
+};
+
 module.exports = {
   create,
   getAppts,
   isAuthenticated,
+  updateAppts,
 };
