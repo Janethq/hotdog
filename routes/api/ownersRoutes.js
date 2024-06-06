@@ -6,4 +6,7 @@ const ownerApptCtrl = require("../../controllers/api/ownerApptController");
 // POST /api/owner
 router.post("/newappt", ownerApptCtrl.create);
 
+// gets all appointments for a specific owner
+router.get("/appts/:id", ownerApptCtrl.getAppts);
+
 module.exports = router;

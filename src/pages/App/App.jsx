@@ -13,7 +13,6 @@ const log = debug("mern:pages:App:App");
 function App() {
   const [user, setUser] = useState(getUser());
   log("user %o", user);
-
   if (!user) {
     return (
       <main className="App">
@@ -29,8 +28,14 @@ function App() {
         <main className="flex-1 p-6">
           <Routes>
             <Route path="/profile" element={<ProfileSection user={user} />} />
-            <Route path="/appointments" element={<Appointments />} />
-            <Route path="/addappt" element={<AddAppointment />} />
+            <Route
+              path="/appointments"
+              element={<Appointments userId={user._id} />}
+            />
+            <Route
+              path="/addappt"
+              element={<AddAppointment userId={user._id} />}
+            />
           </Routes>
         </main>
       </div>

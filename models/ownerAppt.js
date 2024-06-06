@@ -11,6 +11,7 @@ const ownerApptSchema = new Schema(
     ApptTime: { type: String, required: true },
     ApptDate: { type: String, required: true },
     type: { type: String, default: "owner" },
+    userId: { type: Schema.Types.ObjectId, ref: 'User' },
   },
   {
     timestamps: true,

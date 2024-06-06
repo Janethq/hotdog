@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddAppointment() {
+export default function AddAppointment({userId}) {
   const [formData, setFormData] = useState({
     service: "", // Initial state can be empty or a default value
     date: "",
@@ -14,7 +14,7 @@ export default function AddAppointment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/owner/newappt", {
+      const response = await fetch("/api/owners/newappt", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,6 +23,8 @@ export default function AddAppointment() {
           service: formData.service,
           ApptDate: formData.date,
           ApptTime: formData.time,
+          //userId: userId
+          userId
         }),
       });
       if (response.ok) {
