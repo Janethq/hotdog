@@ -43,19 +43,6 @@ const getAllAppts = async (req, res) => {
   }
 };
 
-const getVendorAppts = async (req, res) => {
-  try {
-    const vendorAppts = await OwnerAppt.find({ serviceId: req.params.id })
-      .populate("serviceId")
-      .populate("userId")
-      .exec();
-    console.log(vendorAppts[0]);
-    res.json(vendorAppts);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
 const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
@@ -100,6 +87,5 @@ module.exports = {
   isAuthenticated,
   updateAppts,
   delAppts,
-  getVendorAppts,
   getAllAppts
 };
