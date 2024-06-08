@@ -43,12 +43,6 @@ export default function VendorAppts({ userId }) {
         <section key={appt._id} className="mb-4 p-4 border-b border-gray-200">
           <div>
             <p>
-              <strong>Service userId:</strong> {appt.serviceId._id}
-            </p>
-            <p>
-              <strong>Vendor:</strong> {appt.serviceId.companyName}
-            </p>
-            <p>
               <strong>Owner:</strong> {appt.userId.name}
             </p>
             <p>
