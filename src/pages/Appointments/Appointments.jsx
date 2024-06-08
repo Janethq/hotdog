@@ -30,7 +30,7 @@ export default function Appointments({ userId, dogName }) {
       }
     };
     fetchAppointments();
-  });
+  }, []);
 
   const handleEdit = (apptId) => {
     setEditing(apptId);

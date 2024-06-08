@@ -11,26 +11,14 @@ const endOfNextMonth = nextMonth.endOf("month");
 export default function AddAppointment({ userId }) {
   const navigate = useNavigate();
   const [services, setServices] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const [formData, setFormData] = useState({
     service: "", // Initial state can be empty or a default value
     date: today,
     time: "",
   });
+  const [error, setError] = useState(null);
 
-
-  // useEffect(() => {
-  //   console.log(formData);
-  //   const { date, time } = formData;
-  //   console.log(date);
-  //   console.log(time);
-  //   const dt = `${date}T${time}`;
-  //   console.log(dt)
-  //   const dateObj = new Date(dt);
-  //   console.log(dateObj.toLocaleTimeString())
-  // }, [formData]);
-
-  //fetch available service from mongooooo
-  //change state
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -38,7 +26,7 @@ export default function AddAppointment({ userId }) {
         if (response.ok) {
           const data = await response.json();
           console.log(data);
-          setServices(data); // Update state with da services
+          setServices(data);
         } else {
           console.error("Failed to fetch services");
         }
@@ -49,6 +37,29 @@ export default function AddAppointment({ userId }) {
     fetchServices();
   }, []);
 
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const response = await fetch(`/api/owners/simpleappts`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch appointments");
+        }
+
+        const data = await response.json();
+        console.log(data);
+        setAppointments(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchAppointments();
+  }, []);
+
   const handleChange = (e) => {
     console.log(e.$d);
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -56,8 +67,20 @@ export default function AddAppointment({ userId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    console.log(userId);
+
+    // Check for duplicate appointment when i submit
+    const existingAppointment = appointments.find(
+      (appointment) =>
+        appointment.serviceId === formData.service &&
+        appointment.apptDate === formData.date &&
+        appointment.apptTime === formData.time
+    );
+
+    if (existingAppointment) {
+      setError("You have already made this appointment!");
+      return;
+    }
+
     try {
       const response = await fetch("/api/owners/newappt", {
         method: "POST",
@@ -85,8 +108,6 @@ export default function AddAppointment({ userId }) {
     }
   };
 
-  useEffect(() => console.log(formData), [formData]);
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -94,6 +115,7 @@ export default function AddAppointment({ userId }) {
     >
       <fieldset className="mb-6">
         <legend className="text-xl font-bold mb-4">Add Appointment</legend>
+        {error && <div className="text-red-500 mb-4">{error}</div>}
         <div className="mb-4">
           <label
             className="block text-gray-700 font-bold mb-2"
@@ -131,8 +153,10 @@ export default function AddAppointment({ userId }) {
             minDate={tomorrow}
             maxDate={endOfNextMonth}
             onChange={(datePicked) =>
-              //use dayjs package to format date picked and then format to yyyy-mm-dd
-              setFormData({ ...formData, date: dayjs(datePicked.$d).format('YYYY-MM-DD') })
+              setFormData({
+                ...formData,
+                date: dayjs(datePicked.$d).format("YYYY-MM-DD"),
+              })
             }
             format="YYYY-MM-DD"
           />

@@ -43,6 +43,16 @@ const getAllAppts = async (req, res) => {
   }
 };
 
+const getSimpleAppts = async (req, res) => {
+  try {
+    const simpleAppts = await OwnerAppt.find({})
+    console.log(simpleAppts[0]);
+    res.json(simpleAppts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
@@ -87,5 +97,6 @@ module.exports = {
   isAuthenticated,
   updateAppts,
   delAppts,
-  getAllAppts
+  getAllAppts,
+  getSimpleAppts,
 };
