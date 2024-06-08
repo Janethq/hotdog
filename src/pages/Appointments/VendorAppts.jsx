@@ -20,9 +20,22 @@ export default function VendorAppts({ userId }) {
         const data = await response.json();
         console.log(data);
         console.log({ userId }); //filter data by this
+
+        // Filter out expired appointments
+        const currentDate = new Date();
         const filteredAppointments = data.filter(
-          (appt) => appt.serviceId._id === userId
+          (appt) =>
+            appt.serviceId._id === userId &&
+            new Date(appt.apptDate + "T" + appt.apptTime) > currentDate
         );
+
+        // Sort appointments by earliest time
+        filteredAppointments.sort((a, b) => {
+          const timeA = new Date(`${a.apptDate}T${a.apptTime}`);
+          const timeB = new Date(`${b.apptDate}T${b.apptTime}`);
+          return timeA - timeB;
+        });
+
         setAppointments(filteredAppointments);
       } catch (err) {
         setError(err.message);

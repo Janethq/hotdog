@@ -106,7 +106,7 @@ export default function Appointments({ userId }) {
             // Editing mode
             <div>
               <p>
-                <strong>Service:</strong> {appt.serviceId.service}
+                <strong>{appt.serviceId.service}</strong>
               </p>
               <p>
                 <strong>Address:</strong> {appt.serviceId.address}
@@ -157,7 +157,7 @@ export default function Appointments({ userId }) {
             // Viewing mode
             <div>
               <p>
-                <strong>Service:</strong> {appt.serviceId.service}
+                <strong>{appt.serviceId.service}</strong>
               </p>
               <p>
                 <strong>Address:</strong> {appt.serviceId.address}
