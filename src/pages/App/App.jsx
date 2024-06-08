@@ -31,7 +31,7 @@ function App() {
             <Route path="/profile" element={<ProfileSection user={user} />} />
             <Route
               path="/appointments"
-              element={<Appointments userId={user._id} />}
+              element={<Appointments userId={user._id} dogName={user.dogName} />}
             />
             <Route
               path="/vendorappointments"

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Appointments({ userId }) {
+export default function Appointments({ userId, dogName }) {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,7 +30,7 @@ export default function Appointments({ userId }) {
       }
     };
     fetchAppointments();
-  }, []);
+  });
 
   const handleEdit = (apptId) => {
     setEditing(apptId);
@@ -99,7 +99,7 @@ export default function Appointments({ userId }) {
 
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
-      <h2 className="text-xl font-bold mb-4">Your Appointments</h2>
+      <h2 className="text-xl font-bold mb-4">{dogName}&apos;s Appointments</h2>
       {sortedAppointments.map((appt) => (
         <section key={appt._id} className="mb-4 p-4 border-b border-gray-200">
           {editing === appt._id ? (
