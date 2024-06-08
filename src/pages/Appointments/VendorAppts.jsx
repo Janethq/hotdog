@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function VendorAppts() {
+export default function VendorAppts({ userId }) {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,7 +19,11 @@ export default function VendorAppts() {
 
         const data = await response.json();
         console.log(data);
-        setAppointments(data);
+        console.log({ userId }); //filter data by this
+        const filteredAppointments = data.filter(
+          (appt) => appt.serviceId._id === userId
+        );
+        setAppointments(filteredAppointments);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -27,7 +31,7 @@ export default function VendorAppts() {
       }
     };
     fetchAllAppointments();
-  }, []);
+  }, [userId]); // Include userId in the dependency array
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -38,6 +42,12 @@ export default function VendorAppts() {
       {appointments.map((appt) => (
         <section key={appt._id} className="mb-4 p-4 border-b border-gray-200">
           <div>
+            <p>
+              <strong>Service userId:</strong> {appt.serviceId._id}
+            </p>
+            <p>
+              <strong>Vendor:</strong> {appt.serviceId.companyName}
+            </p>
             <p>
               <strong>Owner:</strong> {appt.userId.name}
             </p>
