@@ -40,7 +40,7 @@ export default function AddAppointment({ userId }) {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch(`/api/owners/simpleappts`, {
+        const response = await fetch(`/api/owners/simpleappts/${userId}`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -58,7 +58,7 @@ export default function AddAppointment({ userId }) {
       }
     };
     fetchAppointments();
-  }, []);
+  }, [userId]);
 
   const handleChange = (e) => {
     console.log(e.$d);

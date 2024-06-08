@@ -45,7 +45,7 @@ const getAllAppts = async (req, res) => {
 
 const getSimpleAppts = async (req, res) => {
   try {
-    const simpleAppts = await OwnerAppt.find({})
+    const simpleAppts = await OwnerAppt.find({ userId: req.params.id })
     console.log(simpleAppts[0]);
     res.json(simpleAppts);
   } catch (err) {

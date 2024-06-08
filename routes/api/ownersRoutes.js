@@ -5,8 +5,8 @@ const ownerApptCtrl = require("../../controllers/api/ownerApptController");
 
 // POST /api/owner
 router.post("/newappt", ownerApptCtrl.create);
-// gets all appointments with NO serviceId and userId object
-router.get("/simpleappts", ownerApptCtrl.getSimpleAppts);
+// gets all appointments with NO serviceId and userId object according to userId
+router.get("/simpleappts/:id", ownerApptCtrl.getSimpleAppts);
 // gets all appointments with serviceId and userId object
 router.get("/allappts", ownerApptCtrl.getAllAppts);
 // gets all appointments for a specific owner
