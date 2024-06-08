@@ -101,6 +101,7 @@ export default class DogOwnerSignUpForm extends Component {
             Password:
             <input
               name="password"
+              type="password"
               value={this.state.password}
               onChange={this.handleChange}
               className="w-full p-2 pl-10 text-sm text-gray-700"
@@ -111,6 +112,7 @@ export default class DogOwnerSignUpForm extends Component {
             Confirm:
             <input
               name="confirm"
+              type="password"
               value={this.state.confirm}
               onChange={this.handleChange}
               className="w-full p-2 pl-10 text-sm text-gray-700"
