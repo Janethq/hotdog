@@ -19,7 +19,7 @@ export default function AuthPage({ setUser }) {
           onChange={handleLoginTypeChange}
           className="w-48 p-2 text-sm text-gray-700 border border-gray-300 rounded-md"
         >
-          <option value="">Select Registration type</option>
+          <option value="">Sign up</option>
           <option value="dogOwner">Dog Owner</option>
           <option value="vendor">Vendor</option>
         </select>

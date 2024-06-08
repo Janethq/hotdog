@@ -7,6 +7,7 @@ import AuthPage from "../AuthPage/AuthPage";
 import Appointments from "../Appointments/Appointments";
 import ProfileSection from "../../components/ProfileSection/ProfileSection";
 import AddAppointment from "../../components/AddForm/AddAppointment";
+import VendorAppts from "../Appointments/VendorAppts";
 
 const log = debug("mern:pages:App:App");
 
@@ -31,6 +32,10 @@ function App() {
             <Route
               path="/appointments"
               element={<Appointments userId={user._id} />}
+            />
+            <Route
+              path="/vendorappointments"
+              element={<VendorAppts userId={user._id} />}
             />
             <Route
               path="/addappt"

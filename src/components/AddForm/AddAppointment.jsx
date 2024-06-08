@@ -145,7 +145,7 @@ export default function AddAppointment({ userId }) {
           <TimePicker
             name="time"
             id="time"
-            // as long as not 0 and not 30, disable
+            //30min interval selection: as long as not 0 and not 30, disable
             shouldDisableTime={(value, view) => view === 'minutes' && (value.minute() !== 0 && value.minute() !== 30) }
             onChange={(timePicked) => setFormData({ ...formData, time: dayjs(timePicked.$d).format('HH:mm') })}
             format="HH:mm"
