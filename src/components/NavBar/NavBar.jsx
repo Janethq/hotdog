@@ -16,20 +16,31 @@ export default function NavBar({ user, setUser }) {
         Profile
       </NavLink>
       <div className="h-px bg-gray-700"></div>
-      <NavLink
-        to="/appointments"
-        className="py-2 px-4 hover:bg-gray-700 hover:text-white transition duration-300"
-      >
-        Appointments
-      </NavLink>
-      <div className="h-px bg-gray-700"></div>
-      {user && user.type === "owner" && (
+      {user.type === "owner" && (
         <>
+          <NavLink
+            to="/appointments"
+            className="py-2 px-4 hover:bg-gray-700 hover:text-white transition duration-300"
+          >
+            Appointments
+          </NavLink>
+          <div className="h-px bg-gray-700"></div>
           <NavLink
             to="/addappt"
             className="py-2 px-4 hover:bg-gray-700 hover:text-white transition duration-300"
           >
             Add Appointment
+          </NavLink>
+          <div className="h-px bg-gray-700"></div>
+        </>
+      )}
+      {user.type === "vendor" && (
+        <>
+          <NavLink
+            to="/vendorappointments"
+            className="py-2 px-4 hover:bg-gray-700 hover:text-white transition duration-300"
+          >
+            Appointments
           </NavLink>
           <div className="h-px bg-gray-700"></div>
         </>
