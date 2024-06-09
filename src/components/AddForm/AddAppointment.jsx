@@ -60,9 +60,26 @@ export default function AddAppointment({ userId }) {
     fetchAppointments();
   }, [userId]);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const handleChange = (e) => {
+  const selectedServiceId = e.target.value;
+console.log("Appointments:", appointments);
+console.log("Selected serviceId:", selectedServiceId);
+
+  // Find the appointment object with the matching serviceId
+  const selectedAppointment = appointments.find(
+    (appointment) => appointment.serviceId._id === selectedServiceId
+  );
+console.log("Selected appointment:", selectedAppointment);
+
+  if (selectedAppointment) {
+    // Access the serviceDuration from the selected appointment convert to number
+    const serviceDurationHours = Number(selectedAppointment.serviceId.serviceDuration);
+    console.log(`service duration: ${serviceDurationHours} hr`);
+  }
+
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
 
   // Inside the component function AddAppointment
   const handleDateChange = (datePicked) => {
