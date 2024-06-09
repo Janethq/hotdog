@@ -40,7 +40,7 @@ export default function AddAppointment({ userId }) {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch(`/api/owners/simpleappts/${userId}`, {
+        const response = await fetch(`/api/owners/allappts`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -71,7 +71,7 @@ export default function AddAppointment({ userId }) {
     // Check for duplicate appointment when i submit
     const existingAppointment = appointments.find(
       (appointment) =>
-        appointment.serviceId === formData.service &&
+        appointment.serviceId._id === formData.service &&
         appointment.apptDate === formData.date &&
         appointment.apptTime === formData.time
     );
