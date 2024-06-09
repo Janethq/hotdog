@@ -65,14 +65,14 @@ const handleChange = (e) => {
 console.log("Appointments:", appointments);
 console.log("Selected serviceId:", selectedServiceId);
 
-  // Find the appointment object with the matching serviceId
+  // Find appointment object with matching serviceId
   const selectedAppointment = appointments.find(
     (appointment) => appointment.serviceId._id === selectedServiceId
   );
 console.log("Selected appointment:", selectedAppointment);
 
   if (selectedAppointment) {
-    // Access the serviceDuration from the selected appointment convert to number
+    // Access serviceDuration from selected appointment then convert to number
     const serviceDurationHours = Number(selectedAppointment.serviceId.serviceDuration);
     console.log(`service duration: ${serviceDurationHours} hr`);
   }
