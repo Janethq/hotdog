@@ -61,8 +61,19 @@ export default function AddAppointment({ userId }) {
   }, [userId]);
 
   const handleChange = (e) => {
-    console.log(e.$d);
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Inside the component function AddAppointment
+  const handleDateChange = (datePicked) => {
+    setFormData({
+      ...formData,
+      date: dayjs(datePicked.$d).format("YYYY-MM-DD"),
+    });
+  };
+
+  const handleTimeChange = (timePicked) => {
+    setFormData({ ...formData, time: dayjs(timePicked.$d).format("HH:mm") });
   };
 
   const handleSubmit = async (e) => {
@@ -152,12 +163,7 @@ export default function AddAppointment({ userId }) {
             defaultValue={today}
             minDate={tomorrow}
             maxDate={endOfNextMonth}
-            onChange={(datePicked) =>
-              setFormData({
-                ...formData,
-                date: dayjs(datePicked.$d).format("YYYY-MM-DD"),
-              })
-            }
+            onChange={handleDateChange}
             format="YYYY-MM-DD"
           />
         </div>
@@ -169,9 +175,12 @@ export default function AddAppointment({ userId }) {
           <TimePicker
             name="time"
             id="time"
-            //30min interval selection: as long as not 0 and not 30, disable
-            shouldDisableTime={(value, view) => view === 'minutes' && (value.minute() !== 0 && value.minute() !== 30) }
-            onChange={(timePicked) => setFormData({ ...formData, time: dayjs(timePicked.$d).format('HH:mm') })}
+            shouldDisableTime={(value, view) =>
+              view === "minutes" &&
+              value.minute() !== 0 &&
+              value.minute() !== 30
+            }
+            onChange={handleTimeChange}
             format="HH:mm"
           />
         </div>
