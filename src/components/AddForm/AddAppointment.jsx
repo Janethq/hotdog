@@ -19,6 +19,7 @@ export default function AddAppointment({ userId }) {
   });
   const [error, setError] = useState(null);
   const [serviceTime, setServiceTime] = useState(0);
+  const [openingHours, setOpeningHours] = useState("");
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -72,12 +73,20 @@ console.log("Selected serviceId:", selectedServiceId);
   );
 console.log("Selected appointment:", selectedAppointment);
 
-  if (selectedAppointment) {
-    // Access serviceDuration from selected appointment then convert to number
-    const serviceDurationHours = Number(selectedAppointment.serviceId.serviceDuration);
-    console.log(`service duration: ${serviceDurationHours} hr`);
-    setServiceTime(serviceDurationHours)
-  }
+    if (selectedAppointment) {
+      // Access serviceDuration from selected appointment then convert to number
+      const serviceDurationHours = Number(
+        selectedAppointment.serviceId.serviceDuration
+      );
+      console.log(`service duration: ${serviceDurationHours} hr`);
+      setServiceTime(serviceDurationHours);
+
+      setOpeningHours(
+        `Opening hours: ${selectedAppointment.serviceId.openingHoursStart} - ${selectedAppointment.serviceId.openingHoursEnd}`
+      );
+    } else {
+      setOpeningHours(""); // else clear
+    }
 
   setFormData({ ...formData, [e.target.name]: e.target.value });
 };
@@ -125,7 +134,7 @@ console.log("Selected appointment:", selectedAppointment);
       const apptEndTime = apptStartTime.add(
         appointment.serviceId.serviceDuration,
         "hour"
-      ); 
+      );
       // Check if new appt STARTT time is before existing appointment's end time
       const startsBeforeEnd = startTime.isBefore(apptEndTime);
       // Check if new appt END time is after existing appointment's start time
@@ -199,6 +208,7 @@ console.log("Selected appointment:", selectedAppointment);
             ))}
           </select>
         </div>
+        <div className="text-blue-500 mb-4">{openingHours}</div>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="date">
             Date:
