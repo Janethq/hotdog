@@ -18,6 +18,7 @@ export default function AddAppointment({ userId }) {
     time: "",
   });
   const [error, setError] = useState(null);
+  const [serviceTime, setServiceTime] = useState(0);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -75,6 +76,7 @@ console.log("Selected appointment:", selectedAppointment);
     // Access serviceDuration from selected appointment then convert to number
     const serviceDurationHours = Number(selectedAppointment.serviceId.serviceDuration);
     console.log(`service duration: ${serviceDurationHours} hr`);
+    setServiceTime(serviceDurationHours)
   }
 
   setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -106,6 +108,34 @@ console.log("Selected appointment:", selectedAppointment);
 
     if (existingAppointment) {
       setError("You have already made this appointment!");
+      return;
+    }
+
+    // Calculate end time of new appointment
+    const startTime = dayjs(`${formData.date} ${formData.time}`);
+    //take serviceTime from state because this is from currently selected service
+    const endTime = startTime.add(serviceTime, "hour");
+
+    // Check for overlapping appointments
+    const overlappingAppointment = appointments.find((appointment) => {
+      const apptStartTime = dayjs(
+        `${appointment.apptDate} ${appointment.apptTime}`
+      );
+      // Access service duration from the fetchAppointment data, not from serviceTime state!
+      const apptEndTime = apptStartTime.add(
+        appointment.serviceId.serviceDuration,
+        "hour"
+      ); 
+      // Check if new appt STARTT time is before existing appointment's end time
+      const startsBeforeEnd = startTime.isBefore(apptEndTime);
+      // Check if new appt END time is after existing appointment's start time
+      const endsAfterStart = endTime.isAfter(apptStartTime);
+      // If both conditions true, OVERLAP TRUE!
+      return startsBeforeEnd && endsAfterStart;
+    });
+
+    if (overlappingAppointment) {
+      setError("You have another appointment to go to!");
       return;
     }
 
