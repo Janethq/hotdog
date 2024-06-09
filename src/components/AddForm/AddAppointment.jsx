@@ -125,6 +125,26 @@ console.log("Selected appointment:", selectedAppointment);
     //take serviceTime from state because this is from currently selected service
     const endTime = startTime.add(serviceTime, "hour");
 
+    // Check if the selected time falls within the opening hours
+    //destructure start and end
+    const [startHour, endHour] = openingHours
+      .split(" - ") // Split by -
+      .map((time) => time.split(":")[0]) // map over time, extract hour part[0] each time
+      .map(Number);
+      console
+      .log(openingHours)
+      //format it nice
+    const startOfOpeningHours = dayjs().set("hour", startHour).set("minute", 0);
+    console.log(startOfOpeningHours)
+    const endOfOpeningHours = dayjs().set("hour", endHour).set("minute", 0);
+
+    if (
+      startTime.isBefore(startOfOpeningHours) ||
+      endTime.isAfter(endOfOpeningHours)
+    ) {
+      setError("Service is not available at this selected time.");
+      return;
+    }
     // Check for overlapping appointments
     const overlappingAppointment = appointments.find((appointment) => {
       const apptStartTime = dayjs(
