@@ -8,17 +8,16 @@ const tomorrow = today.add(1, "day");
 const nextMonth = today.add(1, "month");
 const endOfNextMonth = nextMonth.endOf("month");
 
-export default function AddAppointment({userId}) {
+export default function AddAppointment({ userId }) {
   const navigate = useNavigate();
   const [services, setServices] = useState([]);
-  // const [appointments, setAppointments] = useState([]);
   const [formData, setFormData] = useState({
     service: "", // Initial state can be empty or a default value
     date: today,
     time: "",
   });
   const [error, setError] = useState(null);
-  // const [serviceTime, setServiceTime] = useState(0);
+  const [serviceDuration, setServiceDuration] = useState(0);
   const [openingHours, setOpeningHours] = useState("");
 
   useEffect(() => {
@@ -39,76 +38,29 @@ export default function AddAppointment({userId}) {
     fetchServices();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchAppointments = async () => {
-  //     try {
-  //       const response = await fetch(`/api/owners/allappts`, {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       });
-
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch appointments");
-  //       }
-
-  //       const data = await response.json();
-  //       console.log(data);
-  //       setAppointments(data);
-  //       if (data.length > 0) {
-  //       const firstAppointment = data[0];
-  //       setOpeningHours(
-  //         `Opening hours: ${firstAppointment.serviceId.openingHoursStart} - ${firstAppointment.serviceId.openingHoursEnd}`
-  //       );
-  //     } else {
-  //       setOpeningHours("");
-  //      } // Clear opening hours if no appointments
-  //     } catch (err) {
-  //       setError(err.message);
-  //     }
-  //   };
-  //   fetchAppointments();
-  // }, [userId]);
-
-const handleChange = (e) => {
+  const handleChange = (e) => {
     const selectedServiceId = e.target.value;
-  const selectedService = services.find(
-    (service) => service.serviceId === selectedServiceId
-  );
-
-  if (selectedService) {
-    console.log("Selected service start time:", selectedService.servicesStartHr);
-    console.log("Selected service end time:", selectedService.servicesEndHr);
-    setOpeningHours(
-      `Opening Hours: ${selectedService.servicesStartHr} - ${selectedService.servicesEndHr}`
+    const selectedService = services.find(
+      (service) => service.serviceId === selectedServiceId
     );
-  } else {
+
+    if (selectedService) {
+      console.log(
+        "Selected service start time:",
+        selectedService.servicesStartHr
+      ); //Selected service start time: 11:00
+      console.log("Selected service end time:", selectedService.servicesEndHr); //Selected service end time: 17:00
+      setServiceDuration(Number(selectedService.serviceTime));
+      console.log(selectedService.serviceTime); //1
+      setOpeningHours(
+        `Opening Hours: ${selectedService.servicesStartHr} - ${selectedService.servicesEndHr}`
+      );
+    } else {
       setOpeningHours(""); // else clear
-  }
+    }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-
-//   // Find appointment object with matching serviceId
-//   const selectedAppointment = appointments.find(
-//     (appointment) => appointment.serviceId._id === selectedServiceId
-//   );
-// console.log("Selected appointment:", selectedAppointment);
-
-//     if (selectedAppointment) {
-//       // Access serviceDuration from selected appointment then convert to number
-//       const serviceDurationHours = Number(
-//         selectedAppointment.serviceId.serviceDuration
-//       );
-//       console.log(`service duration: ${serviceDurationHours} hr`);
-//       setServiceTime(serviceDurationHours);;
-//     } else {
-//       setOpeningHours(""); // else clear
-//     }
-
-  setFormData({ ...formData, [e.target.name]: e.target.value });
-};
-
-
-  // Inside the component function AddAppointment
   const handleDateChange = (datePicked) => {
     setFormData({
       ...formData,
@@ -123,72 +75,39 @@ const handleChange = (e) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // // Check for duplicate appointment when i submit
-    // const existingAppointment = appointments.find(
-    //   (appointment) =>
-    //     appointment.serviceId._id === formData.service &&
-    //     appointment.apptDate === formData.date &&
-    //     appointment.apptTime === formData.time
-    // );
+    // Convert selected time to dayjs object
+    const selectedDateTime = dayjs(`${formData.date} ${formData.time}`);
 
-    // if (existingAppointment) {
-    //   setError("You have already made this appointment!");
-    //   return;
-    // }
+    // Find the selected service
+    const selectedService = services.find(
+      (service) => service.serviceId === formData.service
+    );
 
-    // // Calculate end time of new appointment
-    // const startTime = dayjs(`${formData.date} ${formData.time}`);
-    // //take serviceTime from state because this is from currently selected service
-    // const endTime = startTime.add(serviceTime, "hour");
+    // Check if selected service exists
+    if (!selectedService) {
+      setError("Invalid service selected");
+      return;
+    }
 
-    // // Check if the selected time falls within the opening hours
-    // //destructure start and end
-    // const [startHour, endHour] = openingHours
-    //   .split(" - ") // Split by -
-    //   .map((time) => time.split(":")[0]) // map over time, extract hour part[0] each time
-    //   .map(Number);
-    //   console
-    //   .log(openingHours)
-    //   //format it nice
-    //   console.log(`formData.date: ${formData.date}`)
-    // const startOfOpeningHours = dayjs(formData.date)
-    //   .set("hour", startHour)
-    //   .set("minute", 0);
-    // console.log(startOfOpeningHours);
-    // const endOfOpeningHours = dayjs(formData.date)
-    //   .set("hour", endHour)
-    //   .set("minute", 0);
+    // Calculate service end time
+    const serviceEndTime = selectedDateTime.add(serviceDuration, "hour");
 
+    // Extract service start and end hours
+    const serviceStartHour = dayjs(
+      `${formData.date} ${selectedService.servicesStartHr}`
+    );
+    const serviceEndHour = dayjs(
+      `${formData.date} ${selectedService.servicesEndHr}`
+    );
 
-    // if (
-    //   startTime.isBefore(startOfOpeningHours) ||
-    //   endTime.isAfter(endOfOpeningHours)
-    // ) {
-    //   setError("Service is not available at this selected time.");
-    //   return;
-    // }
-    // // Check for overlapping appointments
-    // const overlappingAppointment = appointments.find((appointment) => {
-    //   const apptStartTime = dayjs(
-    //     `${appointment.apptDate} ${appointment.apptTime}`
-    //   );
-    //   // Access service duration from the fetchAppointment data, not from serviceTime state!
-    //   const apptEndTime = apptStartTime.add(
-    //     appointment.serviceId.serviceDuration,
-    //     "hour"
-    //   );
-    //   // Check if new appt STARTT time is before existing appointment's end time
-    //   const startsBeforeEnd = startTime.isBefore(apptEndTime);
-    //   // Check if new appt END time is after existing appointment's start time
-    //   const endsAfterStart = endTime.isAfter(apptStartTime);
-    //   // If both conditions true, OVERLAP TRUE!
-    //   return startsBeforeEnd && endsAfterStart;
-    // });
-
-    // if (overlappingAppointment) {
-    //   setError("You have another appointment to go to!");
-    //   return;
-    // }
+    // Check if selected time is within service opening hours
+    if (
+      selectedDateTime.isBefore(serviceStartHour) ||
+      serviceEndTime.isAfter(serviceEndHour)
+    ) {
+      setError("No service available at the selected time");
+      return;
+    }
 
     try {
       const response = await fetch("/api/owners/newappt", {
@@ -200,7 +119,6 @@ const handleChange = (e) => {
           serviceId: formData.service,
           apptDate: formData.date,
           apptTime: formData.time,
-          //userId: userId
           userId,
         }),
       });
