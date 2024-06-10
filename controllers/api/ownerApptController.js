@@ -1,15 +1,55 @@
 const debug = require("debug")("mern:controllers:api:usersController");
 const OwnerAppt = require("../../models/ownerAppt");
+const dayjs = require("dayjs");
 
 const create = async (req, res) => {
   debug("body: %o", req.body);
-  console.log("< ----- ===== create route running ===== ----- >");
   const { serviceId, apptDate, apptTime, userId } = req.body;
 
-  // check for double booking here
-  // if there is, send an error message or something to the frontend
-  // the frontend can read the message and set it into the error state
-  // however, if there's no problem, DO NOT respond to frontend yet
+  // check for double booking
+  const duplicateAppointment = await OwnerAppt.findOne({
+    serviceId,
+    apptDate,
+    apptTime,
+  });
+  // if there is, send an error message to frontend. Frontend read the message and set it into the error state
+  if (duplicateAppointment) {
+    return res
+      .status(400)
+      .json({ error: "You already created this appointment!" });
+  }
+
+  // check for overlapped booking
+  const existingAppointments = await OwnerAppt.find({ userId })
+    .populate("serviceId")
+    .exec();
+  //selected appt timings
+  const newApptStartTime = dayjs(`${apptDate} ${apptTime}`);
+  const newApptEndTime = newApptStartTime.add(
+    existingAppointments[0].serviceId.serviceDuration,
+    "hour"
+  );
+  //loop thgrough all the other appts for this user to find appt time
+  for (const existingAppt of existingAppointments) {
+    const existingApptStartTime = dayjs(
+      `${existingAppt.apptDate} ${existingAppt.apptTime}`
+    );
+    const existingApptEndTime = existingApptStartTime.add(
+      existingAppt.serviceId.serviceDuration,
+      "hour"
+    );
+    //overlap condition
+    if (
+      newApptStartTime.isBefore(existingApptEndTime) &&
+      newApptEndTime.isAfter(existingApptStartTime)
+    ) {
+      return res
+        .status(400)
+        .json({ error: "You have another appointment to go to!" });
+    }
+  }
+
+  // however, if there's no problem, DO NOT respond to frontend. create the appt
   try {
     const ownerAppt = await OwnerAppt.create({
       serviceId,
@@ -27,8 +67,11 @@ const create = async (req, res) => {
 
 const getAppts = async (req, res) => {
   try {
-    const ownerAppts = await OwnerAppt.find({ userId: req.params.id }).populate('userId').populate('serviceId').exec()
-    console.log(ownerAppts[0])
+    const ownerAppts = await OwnerAppt.find({ userId: req.params.id })
+      .populate("userId")
+      .populate("serviceId")
+      .exec();
+    console.log(ownerAppts[0]);
     res.json(ownerAppts);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -50,7 +93,7 @@ const getAllAppts = async (req, res) => {
 
 const getSimpleAppts = async (req, res) => {
   try {
-    const simpleAppts = await OwnerAppt.find({ userId: req.params.id })
+    const simpleAppts = await OwnerAppt.find({ userId: req.params.id });
     console.log(simpleAppts[0]);
     res.json(simpleAppts);
   } catch (err) {

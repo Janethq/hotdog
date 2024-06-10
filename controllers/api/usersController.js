@@ -116,6 +116,8 @@ const getAllServices = async (req, res) => {
         const responseObj = {
           serviceName: user.service,
           serviceId: user._id,
+          servicesStartHr: user.openingHoursStart,
+          servicesEndHr: user.openingHoursEnd
         };
         services.push(responseObj); // Push the service to the array
       }

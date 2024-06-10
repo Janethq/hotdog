@@ -8,17 +8,17 @@ const tomorrow = today.add(1, "day");
 const nextMonth = today.add(1, "month");
 const endOfNextMonth = nextMonth.endOf("month");
 
-export default function AddAppointment({ userId }) {
+export default function AddAppointment({userId}) {
   const navigate = useNavigate();
   const [services, setServices] = useState([]);
-  const [appointments, setAppointments] = useState([]);
+  // const [appointments, setAppointments] = useState([]);
   const [formData, setFormData] = useState({
     service: "", // Initial state can be empty or a default value
     date: today,
     time: "",
   });
   const [error, setError] = useState(null);
-  const [serviceTime, setServiceTime] = useState(0);
+  // const [serviceTime, setServiceTime] = useState(0);
   const [openingHours, setOpeningHours] = useState("");
 
   useEffect(() => {
@@ -39,58 +39,70 @@ export default function AddAppointment({ userId }) {
     fetchServices();
   }, []);
 
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      try {
-        const response = await fetch(`/api/owners/allappts`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+  // useEffect(() => {
+  //   const fetchAppointments = async () => {
+  //     try {
+  //       const response = await fetch(`/api/owners/allappts`, {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch appointments");
-        }
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch appointments");
+  //       }
 
-        const data = await response.json();
-        console.log(data);
-        setAppointments(data);
-        if (data.length > 0) {
-        const firstAppointment = data[0];
-        setOpeningHours(
-          `Opening hours: ${firstAppointment.serviceId.openingHoursStart} - ${firstAppointment.serviceId.openingHoursEnd}`
-        );
-      } else {
-        setOpeningHours("");
-       } // Clear opening hours if no appointments
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-    fetchAppointments();
-  }, [userId]);
+  //       const data = await response.json();
+  //       console.log(data);
+  //       setAppointments(data);
+  //       if (data.length > 0) {
+  //       const firstAppointment = data[0];
+  //       setOpeningHours(
+  //         `Opening hours: ${firstAppointment.serviceId.openingHoursStart} - ${firstAppointment.serviceId.openingHoursEnd}`
+  //       );
+  //     } else {
+  //       setOpeningHours("");
+  //      } // Clear opening hours if no appointments
+  //     } catch (err) {
+  //       setError(err.message);
+  //     }
+  //   };
+  //   fetchAppointments();
+  // }, [userId]);
 
 const handleChange = (e) => {
-  const selectedServiceId = e.target.value;
-console.log("Appointments:", appointments);
-console.log("Selected serviceId:", selectedServiceId);
-
-  // Find appointment object with matching serviceId
-  const selectedAppointment = appointments.find(
-    (appointment) => appointment.serviceId._id === selectedServiceId
+    const selectedServiceId = e.target.value;
+  const selectedService = services.find(
+    (service) => service.serviceId === selectedServiceId
   );
-console.log("Selected appointment:", selectedAppointment);
 
-    if (selectedAppointment) {
-      // Access serviceDuration from selected appointment then convert to number
-      const serviceDurationHours = Number(
-        selectedAppointment.serviceId.serviceDuration
-      );
-      console.log(`service duration: ${serviceDurationHours} hr`);
-      setServiceTime(serviceDurationHours);;
-    } else {
+  if (selectedService) {
+    console.log("Selected service start time:", selectedService.servicesStartHr);
+    console.log("Selected service end time:", selectedService.servicesEndHr);
+    setOpeningHours(
+      `Opening Hours: ${selectedService.servicesStartHr} - ${selectedService.servicesEndHr}`
+    );
+  } else {
       setOpeningHours(""); // else clear
-    }
+  }
+
+
+//   // Find appointment object with matching serviceId
+//   const selectedAppointment = appointments.find(
+//     (appointment) => appointment.serviceId._id === selectedServiceId
+//   );
+// console.log("Selected appointment:", selectedAppointment);
+
+//     if (selectedAppointment) {
+//       // Access serviceDuration from selected appointment then convert to number
+//       const serviceDurationHours = Number(
+//         selectedAppointment.serviceId.serviceDuration
+//       );
+//       console.log(`service duration: ${serviceDurationHours} hr`);
+//       setServiceTime(serviceDurationHours);;
+//     } else {
+//       setOpeningHours(""); // else clear
+//     }
 
   setFormData({ ...formData, [e.target.name]: e.target.value });
 };
@@ -111,72 +123,72 @@ console.log("Selected appointment:", selectedAppointment);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check for duplicate appointment when i submit
-    const existingAppointment = appointments.find(
-      (appointment) =>
-        appointment.serviceId._id === formData.service &&
-        appointment.apptDate === formData.date &&
-        appointment.apptTime === formData.time
-    );
+    // // Check for duplicate appointment when i submit
+    // const existingAppointment = appointments.find(
+    //   (appointment) =>
+    //     appointment.serviceId._id === formData.service &&
+    //     appointment.apptDate === formData.date &&
+    //     appointment.apptTime === formData.time
+    // );
 
-    if (existingAppointment) {
-      setError("You have already made this appointment!");
-      return;
-    }
+    // if (existingAppointment) {
+    //   setError("You have already made this appointment!");
+    //   return;
+    // }
 
-    // Calculate end time of new appointment
-    const startTime = dayjs(`${formData.date} ${formData.time}`);
-    //take serviceTime from state because this is from currently selected service
-    const endTime = startTime.add(serviceTime, "hour");
+    // // Calculate end time of new appointment
+    // const startTime = dayjs(`${formData.date} ${formData.time}`);
+    // //take serviceTime from state because this is from currently selected service
+    // const endTime = startTime.add(serviceTime, "hour");
 
-    // Check if the selected time falls within the opening hours
-    //destructure start and end
-    const [startHour, endHour] = openingHours
-      .split(" - ") // Split by -
-      .map((time) => time.split(":")[0]) // map over time, extract hour part[0] each time
-      .map(Number);
-      console
-      .log(openingHours)
-      //format it nice
-      console.log(`formData.date: ${formData.date}`)
-    const startOfOpeningHours = dayjs(formData.date)
-      .set("hour", startHour)
-      .set("minute", 0);
-    console.log(startOfOpeningHours);
-    const endOfOpeningHours = dayjs(formData.date)
-      .set("hour", endHour)
-      .set("minute", 0);
+    // // Check if the selected time falls within the opening hours
+    // //destructure start and end
+    // const [startHour, endHour] = openingHours
+    //   .split(" - ") // Split by -
+    //   .map((time) => time.split(":")[0]) // map over time, extract hour part[0] each time
+    //   .map(Number);
+    //   console
+    //   .log(openingHours)
+    //   //format it nice
+    //   console.log(`formData.date: ${formData.date}`)
+    // const startOfOpeningHours = dayjs(formData.date)
+    //   .set("hour", startHour)
+    //   .set("minute", 0);
+    // console.log(startOfOpeningHours);
+    // const endOfOpeningHours = dayjs(formData.date)
+    //   .set("hour", endHour)
+    //   .set("minute", 0);
 
 
-    if (
-      startTime.isBefore(startOfOpeningHours) ||
-      endTime.isAfter(endOfOpeningHours)
-    ) {
-      setError("Service is not available at this selected time.");
-      return;
-    }
-    // Check for overlapping appointments
-    const overlappingAppointment = appointments.find((appointment) => {
-      const apptStartTime = dayjs(
-        `${appointment.apptDate} ${appointment.apptTime}`
-      );
-      // Access service duration from the fetchAppointment data, not from serviceTime state!
-      const apptEndTime = apptStartTime.add(
-        appointment.serviceId.serviceDuration,
-        "hour"
-      );
-      // Check if new appt STARTT time is before existing appointment's end time
-      const startsBeforeEnd = startTime.isBefore(apptEndTime);
-      // Check if new appt END time is after existing appointment's start time
-      const endsAfterStart = endTime.isAfter(apptStartTime);
-      // If both conditions true, OVERLAP TRUE!
-      return startsBeforeEnd && endsAfterStart;
-    });
+    // if (
+    //   startTime.isBefore(startOfOpeningHours) ||
+    //   endTime.isAfter(endOfOpeningHours)
+    // ) {
+    //   setError("Service is not available at this selected time.");
+    //   return;
+    // }
+    // // Check for overlapping appointments
+    // const overlappingAppointment = appointments.find((appointment) => {
+    //   const apptStartTime = dayjs(
+    //     `${appointment.apptDate} ${appointment.apptTime}`
+    //   );
+    //   // Access service duration from the fetchAppointment data, not from serviceTime state!
+    //   const apptEndTime = apptStartTime.add(
+    //     appointment.serviceId.serviceDuration,
+    //     "hour"
+    //   );
+    //   // Check if new appt STARTT time is before existing appointment's end time
+    //   const startsBeforeEnd = startTime.isBefore(apptEndTime);
+    //   // Check if new appt END time is after existing appointment's start time
+    //   const endsAfterStart = endTime.isAfter(apptStartTime);
+    //   // If both conditions true, OVERLAP TRUE!
+    //   return startsBeforeEnd && endsAfterStart;
+    // });
 
-    if (overlappingAppointment) {
-      setError("You have another appointment to go to!");
-      return;
-    }
+    // if (overlappingAppointment) {
+    //   setError("You have another appointment to go to!");
+    //   return;
+    // }
 
     try {
       const response = await fetch("/api/owners/newappt", {
@@ -199,9 +211,11 @@ console.log("Selected appointment:", selectedAppointment);
       } else {
         const errorData = await response.json();
         console.error("Error creating appointment:", errorData);
+        setError(errorData.error);
       }
     } catch (error) {
       console.error("Error creating appointment:", error);
+      setError("Error creating appointment");
     }
   };
 
