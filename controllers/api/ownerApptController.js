@@ -3,8 +3,13 @@ const OwnerAppt = require("../../models/ownerAppt");
 
 const create = async (req, res) => {
   debug("body: %o", req.body);
+  console.log("< ----- ===== create route running ===== ----- >");
   const { serviceId, apptDate, apptTime, userId } = req.body;
 
+  // check for double booking here
+  // if there is, send an error message or something to the frontend
+  // the frontend can read the message and set it into the error state
+  // however, if there's no problem, DO NOT respond to frontend yet
   try {
     const ownerAppt = await OwnerAppt.create({
       serviceId,

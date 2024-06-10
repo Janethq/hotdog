@@ -55,6 +55,14 @@ export default function AddAppointment({ userId }) {
         const data = await response.json();
         console.log(data);
         setAppointments(data);
+        if (data.length > 0) {
+        const firstAppointment = data[0];
+        setOpeningHours(
+          `Opening hours: ${firstAppointment.serviceId.openingHoursStart} - ${firstAppointment.serviceId.openingHoursEnd}`
+        );
+      } else {
+        setOpeningHours("");
+       } // Clear opening hours if no appointments
       } catch (err) {
         setError(err.message);
       }
@@ -79,11 +87,7 @@ console.log("Selected appointment:", selectedAppointment);
         selectedAppointment.serviceId.serviceDuration
       );
       console.log(`service duration: ${serviceDurationHours} hr`);
-      setServiceTime(serviceDurationHours);
-
-      setOpeningHours(
-        `Opening hours: ${selectedAppointment.serviceId.openingHoursStart} - ${selectedAppointment.serviceId.openingHoursEnd}`
-      );
+      setServiceTime(serviceDurationHours);;
     } else {
       setOpeningHours(""); // else clear
     }
@@ -134,9 +138,15 @@ console.log("Selected appointment:", selectedAppointment);
       console
       .log(openingHours)
       //format it nice
-    const startOfOpeningHours = dayjs().set("hour", startHour).set("minute", 0);
-    console.log(startOfOpeningHours)
-    const endOfOpeningHours = dayjs().set("hour", endHour).set("minute", 0);
+      console.log(`formData.date: ${formData.date}`)
+    const startOfOpeningHours = dayjs(formData.date)
+      .set("hour", startHour)
+      .set("minute", 0);
+    console.log(startOfOpeningHours);
+    const endOfOpeningHours = dayjs(formData.date)
+      .set("hour", endHour)
+      .set("minute", 0);
+
 
     if (
       startTime.isBefore(startOfOpeningHours) ||
