@@ -100,8 +100,13 @@ export default function Appointments({ userId, dogName }) {
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
       <h2 className="text-xl font-bold mb-4">{dogName}&apos;s Appointments</h2>
-      {sortedAppointments.map((appt) => (
-        <section key={appt._id} className="mb-4 p-4 border-b border-gray-200">
+      {sortedAppointments.map((appt, index) => (
+        <section
+          key={appt._id}
+          className={`mb-4 p-4 border-b border-gray-200 ${
+            index === 0 ? "bg-yellow-100" : ""
+          }`}
+        >
           {editing === appt._id ? (
             // Editing mode
             <div>

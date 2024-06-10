@@ -52,8 +52,13 @@ export default function VendorAppts({ userId }) {
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
       <h2 className="text-xl font-bold mb-4">Your Appointments</h2>
-      {appointments.map((appt) => (
-        <section key={appt._id} className="mb-4 p-4 border-b border-gray-200">
+      {appointments.map((appt, index) => (
+        <section
+          key={appt._id}
+          className={`mb-4 p-4 border-b border-gray-200 ${
+            index === 0 ? "bg-yellow-100" : ""
+          }`}
+        >
           <div>
             <p>
               <strong>Owner:</strong> {appt.userId.name}
