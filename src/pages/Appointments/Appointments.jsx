@@ -124,6 +124,7 @@ export default function Appointments({ userId, dogName }) {
               <p>
                 <strong>Service Duration:</strong>{" "}
                 {appt.serviceId.serviceDuration}
+                {"Hr"}
               </p>
               <p>
                 <strong>Date:</strong>{" "}
@@ -175,6 +176,7 @@ export default function Appointments({ userId, dogName }) {
               <p>
                 <strong>Service Duration:</strong>{" "}
                 {appt.serviceId.serviceDuration}
+                {"Hr"}
               </p>
               <p>
                 <strong>Date:</strong>{" "}
