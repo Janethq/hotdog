@@ -140,7 +140,7 @@ export default function AddAppointment({ userId }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200"
+      className="max-w-md mx-auto bg-transparent p-6 rounded-lg shadow-md border border-gray-200 mt-[-100px]"
     >
       <fieldset className="mb-6">
         <legend className="text-xl font-bold mb-4">Add Appointment</legend>

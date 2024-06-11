@@ -119,7 +119,7 @@ export default class DogOwnerSignUpForm extends Component {
             />
           </label>
 
-          <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+          <button className="bg-[#ac6031] hover:bg-[#ba2d4c] text-white font-bold py-2 px-4 rounded">
             Sign Up
           </button>
 

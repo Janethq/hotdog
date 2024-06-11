@@ -54,7 +54,7 @@ export default function LoginForm({ setUser }) {
           />
         </label>
         <br />
-        <button className="w-full p-2 bg-blue-500 text-white rounded-md">
+        <button className="bg-[#ac6031] hover:bg-[#ba2d4c] text-white font-bold py-2 px-4 rounded">
           Login
         </button>
         {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
