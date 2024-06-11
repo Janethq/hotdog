@@ -205,7 +205,7 @@ export default function AddAppointment({ userId }) {
         </div>
         <button
           type="submit"
-          className="w-full p-2 bg-blue-500 text-white rounded-md"
+          className="w-full p-2 bg-[#ac6031] hover:bg-[#ba2d4c] text-white font-bold rounded-md"
         >
           Add
         </button>

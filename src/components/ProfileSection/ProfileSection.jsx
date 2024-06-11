@@ -172,9 +172,7 @@ const ProfileSection = ({ user }) => {
               )}
             </div>
             <div className="mb-4">
-              <label className="block font-semibold">
-                Opening hour:{" "}
-              </label>
+              <label className="block font-semibold">Opening hour: </label>
               {editing ? (
                 <input
                   type="time"
@@ -190,9 +188,7 @@ const ProfileSection = ({ user }) => {
               )}
             </div>
             <div className="mb-4">
-              <label className="block font-semibold">
-                Closing hour:{" "}
-              </label>
+              <label className="block font-semibold">Closing hour: </label>
               {editing ? (
                 <input
                   type="time"
@@ -238,14 +234,14 @@ const ProfileSection = ({ user }) => {
         {editing ? (
           <button
             onClick={handleSave}
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            className="bg-[#ac6031] hover:bg-[#ba2d4c] text-white font-bold py-2 px-4 rounded"
           >
             Save
           </button>
         ) : (
           <button
             onClick={handleEdit}
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            className="bg-[#ac6031] hover:bg-[#ba2d4c] text-white font-bold py-2 px-4 rounded"
           >
             Edit
           </button>

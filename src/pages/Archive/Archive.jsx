@@ -36,7 +36,7 @@ export default function Archive({ userId }) {
 
   return (
     <div className="max-w-md mx-auto bg-transparent p-6 rounded-lg shadow-md border border-gray-200">
-      <h2 className="text-xl font-bold mb-4">Fun Past-times</h2>
+      <h2 className="text-xl font-bold mb-4">Past Fun-times</h2>
       <div>
         {filteredAppointments.map((appt) => (
           <div

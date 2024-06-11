@@ -147,13 +147,13 @@ export default function Appointments({ userId, dogName }) {
                 />
               </p>
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2"
+                className="bg-[#ac6031] hover:bg-[#ba2d4c] text-white font-bold py-2 px-4 rounded mr-2"
                 onClick={() => handleSave(appt._id)}
               >
                 Save
               </button>
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                className="bg-[#ac6031] hover:bg-[#ba2d4c] text-white font-bold py-2 px-4 rounded"
                 onClick={() => setEditing(null)}
               >
                 Cancel
@@ -186,13 +186,13 @@ export default function Appointments({ userId, dogName }) {
                 <strong>Time:</strong> {appt.apptTime}
               </p>
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2"
+                className="bg-[#ac6031] hover:bg-[#ba2d4c] text-white font-bold py-2 px-4 rounded mr-2"
                 onClick={() => handleEdit(appt._id)}
               >
                 Edit
               </button>
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                className="bg-[#ac6031] hover:bg-[#ba2d4c] text-white font-bold py-2 px-4 rounded"
                 onClick={() => handleDelete(appt._id)}
               >
                 Delete
