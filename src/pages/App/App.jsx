@@ -8,6 +8,7 @@ import Appointments from "../Appointments/Appointments";
 import ProfileSection from "../../components/ProfileSection/ProfileSection";
 import AddAppointment from "../../components/AddForm/AddAppointment";
 import VendorAppts from "../Appointments/VendorAppts";
+import Search from "../Search/Search";
 
 const log = debug("mern:pages:App:App");
 
@@ -31,11 +32,17 @@ function App() {
             <Route path="/profile" element={<ProfileSection user={user} />} />
             <Route
               path="/appointments"
-              element={<Appointments userId={user._id} dogName={user.dogName} />}
+              element={
+                <Appointments userId={user._id} dogName={user.dogName} />
+              }
             />
             <Route
               path="/vendorappointments"
               element={<VendorAppts userId={user._id} />}
+            />
+            <Route
+              path="/search"
+              element={<Search userId={user._id} />}
             />
             <Route
               path="/addappt"

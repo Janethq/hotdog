@@ -32,6 +32,13 @@ export default function NavBar({ user, setUser }) {
             Add Appointment
           </NavLink>
           <div className="h-px bg-gray-700"></div>
+          <NavLink
+            to="/search"
+            className="py-2 px-4 hover:bg-gray-700 hover:text-white transition duration-300"
+          >
+            Search
+          </NavLink>
+          <div className="h-px bg-gray-700"></div>
         </>
       )}
       {user.type === "vendor" && (
