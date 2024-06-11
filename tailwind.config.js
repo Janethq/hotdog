@@ -4,6 +4,12 @@ module.exports = {
     fontFamily: {
       sans: ["Urbanist", "sans-serif"],
     },
-    plugins: [],
+    extend: {
+      backgroundColor: {
+        ac6031: "#ac6031",
+      },
+    },
   },
+  variants: {},
+  plugins: [],
 };
