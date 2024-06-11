@@ -18,8 +18,8 @@ export default function VendorAppts({ userId }) {
         }
 
         const data = await response.json();
-        console.log(data);
-        console.log({ userId }); //filter data by this
+        console.log("Fetched data:", data);
+        console.log("UserID:", userId);
 
         // Filter out expired appointments
         const currentDate = new Date();
@@ -28,6 +28,8 @@ export default function VendorAppts({ userId }) {
             appt.serviceId._id === userId &&
             new Date(appt.apptDate + "T" + appt.apptTime) > currentDate
         );
+
+        console.log("Filtered appointments:", filteredAppointments);
 
         // Sort appointments by earliest time
         filteredAppointments.sort((a, b) => {
@@ -48,6 +50,10 @@ export default function VendorAppts({ userId }) {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
+
+  if (appointments.length === 0) {
+    return <p>No appointments found.</p>;
+  }
 
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
@@ -70,8 +76,7 @@ export default function VendorAppts({ userId }) {
               <strong>Breed:</strong> {appt.userId.breed}
             </p>
             <p>
-              <strong>Weight:</strong> {appt.userId.weight}
-              {"kg"}
+              <strong>Weight:</strong> {appt.userId.weight} kg
             </p>
             <p>
               <strong>Date:</strong>{" "}

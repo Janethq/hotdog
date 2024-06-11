@@ -28,6 +28,8 @@ function App() {
     switch (path) {
       case "/appointments":
         return apptImage;
+      case "/vendorappointments":
+        return apptImage;
       case "/addappt":
         return addApptImage;
       case "/search":
