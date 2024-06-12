@@ -23,45 +23,69 @@ const create = async (req, res) => {
   const existingAppointments = await OwnerAppt.find({ userId })
     .populate("serviceId")
     .exec();
-  //selected appt timings
-  const newApptStartTime = dayjs(`${apptDate} ${apptTime}`);
-  const newApptEndTime = newApptStartTime.add(
-    existingAppointments[0].serviceId.serviceDuration,
-    "hour"
-  );
-  //loop thgrough all the other appts for this user to find appt time
-  for (const existingAppt of existingAppointments) {
-    const existingApptStartTime = dayjs(
-      `${existingAppt.apptDate} ${existingAppt.apptTime}`
-    );
-    const existingApptEndTime = existingApptStartTime.add(
-      existingAppt.serviceId.serviceDuration,
+
+  if (existingAppointments.length === 0) {
+    // New user, no existing appointments, skip overlap check and create new appointment
+    try {
+      const ownerAppt = await OwnerAppt.create({
+        serviceId,
+        apptTime,
+        apptDate,
+        userId,
+      });
+
+      res.status(201).json(ownerAppt);
+    } catch (error) {
+      debug("error: %o", error);
+      res.status(500).json({ error: "New appt for owner not created" });
+    }
+  } else {
+    // Existing user, check for overlaps
+    const newApptStartTime = dayjs(`${apptDate} ${apptTime}`);
+    const newApptEndTime = newApptStartTime.add(
+      existingAppointments[0].serviceId.serviceDuration,
       "hour"
     );
-    //overlap condition
-    if (
-      newApptStartTime.isBefore(existingApptEndTime) &&
-      newApptEndTime.isAfter(existingApptStartTime)
-    ) {
+
+    let overlapFound = false;
+    for (const existingAppt of existingAppointments) {
+      const existingApptStartTime = dayjs(
+        `${existingAppt.apptDate} ${existingAppt.apptTime}`
+      );
+      const existingApptEndTime = existingApptStartTime.add(
+        existingAppt.serviceId.serviceDuration,
+        "hour"
+      );
+
+      if (
+        newApptStartTime.isBefore(existingApptEndTime) &&
+        newApptEndTime.isAfter(existingApptStartTime)
+      ) {
+        overlapFound = true;
+        break;
+      }
+    }
+
+    if (overlapFound) {
       return res
         .status(400)
         .json({ error: "You have another appointment to go to!" });
+    } else {
+      // If no overlaps, create the new appointment
+      try {
+        const ownerAppt = await OwnerAppt.create({
+          serviceId,
+          apptTime,
+          apptDate,
+          userId,
+        });
+
+        res.status(201).json(ownerAppt);
+      } catch (error) {
+        debug("error: %o", error);
+        res.status(500).json({ error: "New appt for owner not created" });
+      }
     }
-  }
-
-  // however, if there's no problem, DO NOT respond to frontend. create the appt
-  try {
-    const ownerAppt = await OwnerAppt.create({
-      serviceId,
-      apptTime,
-      apptDate,
-      userId,
-    });
-
-    res.status(201).json(ownerAppt);
-  } catch (error) {
-    debug("error: %o", error);
-    res.status(500).json({ error: "New appt for owner not created" });
   }
 };
 
