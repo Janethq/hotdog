@@ -9,6 +9,7 @@ import ProfileSection from "../../components/ProfileSection/ProfileSection";
 import AddAppointment from "../../components/AddForm/AddAppointment";
 import VendorAppts from "../Appointments/VendorAppts";
 import Search from "../Search/Search";
+import Map from "../Map/Map";
 import Archive from "../Archive/Archive";
 import profileImage from "../../assets/profile.png";
 import apptImage from "../../assets/appt.png";
@@ -84,6 +85,7 @@ function App() {
             />
             <Route path="/search" element={<Search userId={user._id} />} />
             <Route path="/archive" element={<Archive userId={user._id} />} />
+            <Route path="/map" element={<Map />} />
             <Route
               path="/addappt"
               element={<AddAppointment userId={user._id} />}
