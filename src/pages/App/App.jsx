@@ -16,6 +16,8 @@ import apptImage from "../../assets/appt.png";
 import addApptImage from "../../assets/addAppt.png";
 import searchImage from "../../assets/search.png";
 import archiveImage from "../../assets/archives.png";
+import mapImage from "../../assets/map.png";
+
 
 const log = debug("mern:pages:App:App");
 
@@ -37,13 +39,15 @@ function App() {
         return searchImage;
       case "/archive":
         return archiveImage;
+      case "/map":
+        return mapImage;
       case "/profile":
       default:
         return profileImage;
     }
   };
 
-  const shouldCenterContent = ["/addappt", "/search", "/archive"].includes(
+  const shouldCenterContent = ["/addappt", "/search", "/archive","/map"].includes(
     location.pathname
   );
 

@@ -73,7 +73,7 @@ export default function NavBar({ user, setUser }) {
           <Link to="/map">
             <button
               className={`w-full py-2 px-4 bg-gray-200 hover:bg-[#ac6031] hover:text-white transition duration-300 rounded mb-4 ${
-                activeButton === "archive" ? "bg-ac6031 text-white" : ""
+                activeButton === "map" ? "bg-ac6031 text-white" : ""
               }`}
               onClick={() => handleClick("map")}
             >
