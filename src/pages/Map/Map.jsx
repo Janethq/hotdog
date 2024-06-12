@@ -5,8 +5,7 @@ import "./Map.css";
 
 export default function Map() {
   const [serviceAddresses, setServiceAddresses] = useState([]);
-    const [serviceNames, setServiceNames] = useState([]);
-
+  const [serviceNames, setServiceNames] = useState([]);
   const [mapCenter, setMapCenter] = useState([1.3521, 103.8198]);
   const [zoom, setZoom] = useState(11);
 

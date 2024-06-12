@@ -74,24 +74,19 @@ export default function AddAppointment({ userId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // Convert selected time to dayjs object
     const selectedDateTime = dayjs(`${formData.date} ${formData.time}`);
-
     // Find the selected service
     const selectedService = services.find(
       (service) => service.serviceId === formData.service
     );
-
     // Check if selected service exists
     if (!selectedService) {
       setError("Invalid service selected");
       return;
     }
-
     // Calculate service end time
     const serviceEndTime = selectedDateTime.add(serviceDuration, "hour");
-
     // Extract service start and end hours
     const serviceStartHour = dayjs(
       `${formData.date} ${selectedService.servicesStartHr}`

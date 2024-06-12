@@ -56,7 +56,7 @@ export default function VendorAppts({ userId }) {
   }
 
   return (
-    <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <div className="max-w-md mx-auto bg-transparent p-6 rounded-lg shadow-md border border-gray-200 overflow-y-auto h-[95vh]">
       <h2 className="text-xl font-bold mb-4">Your Appointments</h2>
       {appointments.map((appt, index) => (
         <section

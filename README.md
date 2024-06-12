@@ -21,7 +21,7 @@ A hotdog stand for all your doggy appointments.
 
 ### WireFrame in [Figma](https://www.figma.com/board/7wnZVosgaE0QaFPJUtcU9Z/Project-4?node-id=0-1&t=1dzTM2a8X56toXq8-0)
 
-<img src="">
+<img src="src/assets/ss/wireframe.png">
 
 ### Example Schema in [Google Sheets](https://docs.google.com/spreadsheets/d/1Wf9Y4I4FwGgeJHnZQdMfJRzvozbgLiwgff7bcOgt40g/edit?gid=0#gid=0)
 
@@ -35,46 +35,44 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 - Allows for 2 types of users with different sign up forms, profile, and appointments page.
 
 - Two user types
-  <img src="">
+  <img src="">(g)
 
-- Login (Vendor)
-  <img src="">
-
-- Login (pet owner)
-  <img src="">
+- Login 
+  <img src="src/assets/ss/login.png">
 
 - Profile Page (Vendor)
-  <img src="">
+  <img src="src/assets/ss/vProfile.png">
 
 - Profile Page (pet owner)
-  <img src="">
+  <img src="src/assets/ss/ownerProfile.png">
 
 - Appointments Page (Vendor)
-  <img src="">
+  <img src="src/assets/ss/vAppts.png">
 
 - Appointments Page (pet owner)
-  <img src="">
+  <img src="src/assets/ss/appts.png">
 
 - Add Appointments Page (pet owner)
-  <img src="">
+  <img src="src/assets/ss/addAppts.png">
 
 - Search Page (pet owner)
-  <img src="">
+  <img src="">(g)
 
 - Archives Page (pet owner)
-  <img src="">
+  <img src="src/assets/ss/archives.png">
 
 ### password hashing
-- Show mongoose
+ <img src="src/assets/ss/pwhash.png">
 
 ### navigation responds to user login status.
-<img src="">
+<img src=""> (g)
 
 ### Favourite Modal
 - 2 Referencing points
 1. ServiceId
 2. UserId
-<img src=""> (show full object)
+<img src="src/assets/ss/apptModel.png">
+<img src="src/assets/ss/ref.png">
 
 ### Favourite Controller
 
@@ -86,11 +84,11 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 
 ### Routing / API
 
-- Users
-<img src="">
+- User Routes
+<img src="src/assets/ss/userRoutes.png">
 
-- Pet owners
-<img src="">
+- Appointment Routes
+<img src="src/assets/ss/apptRoutes.png">
 
 ### different access to the APIs and Webpages
 
@@ -99,41 +97,46 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 1. users
 
 - create
-  <img src="">
+  <img src="src/assets/ss/createUser.png">
 
 - read
-  <img src="">
+  <img src="src/assets/ss/readUser.png">
 
 - update
-  <img src="">
+  <img src="src/assets/ss/updateUser.png">
 
 2. Appointments
 
 - create
-restricting CUD data functionality to authenticated users
-  <img src="">
+
+  <img src="src/assets/ss/createAppt.png">
 
 - read
-  <img src="">
+restricting CUD data functionality to authenticated users
+  <img src="src/assets/ss/readAppts.png">
 
 - update
-  <img src="">
+  <img src="src/assets/ss/updateAppts.png">
 
 - delete
-  <img src="">
+  <img src="src/assets/ss/delAppts.png">
 
 ### Validation
 - Duplicate bookings
-<img src=""> (put gif)
-<img src=""> (put code)
+<img src="src/assets/ss/duplicateAppt.png">
+<img src=""> (g)
 
 - Overlapping bookings
-<img src=""> (put gif)
-<img src=""> (put code)
+<img src="src/assets/ss/overlap1.png">
+condition:
+<img src="src/assets/ss/overlap2.png">
+<img src=""> (g)
 
 - Outside vendor opening hour bookings
-<img src=""> (put gif)
-<img src=""> (put code)
+<img src="src/assets/ss/openinghr1.png">
+condition:
+<img src="src/assets/ss/openinghr2.png">
+<img src=""> (g)
 
 ### Biggest Challenge
 

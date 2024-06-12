@@ -65,7 +65,7 @@ const ProfileSection = ({ user }) => {
 
   return (
     <>
-      <div className="max-w-md mx-auto p-6 bg-transparent rounded-lg shadow-md ml-20">
+      <div className="max-w-md mx-auto p-6 bg-transparent rounded-lg shadow-md ml-20 overflow-y-auto h-[95vh]">
         <h2 className="text-2xl font-bold mb-4">Profile Details</h2>
         <div className="mb-4">
           <label className="block font-semibold">Name: </label>
