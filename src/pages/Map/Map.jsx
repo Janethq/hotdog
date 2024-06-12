@@ -11,7 +11,7 @@ export default function Map() {
   const [zoom, setZoom] = useState(11);
 
   const defaultIcon = new Icon({
-    iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+    iconUrl: "./src/assets/marker.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
   });
