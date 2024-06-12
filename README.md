@@ -137,11 +137,13 @@ restricting CUD data functionality to authenticated users
 
 ### Biggest Challenge
 
+- formatting time and dates
 - moving the checking logic backend
 
 ### Key Takeaways
 
-
+- understand the correct way to do validation backend so I only fetch necessary data frontend
+- took more time to do styling and reinforced some css fundamentals
 
 ---
 
