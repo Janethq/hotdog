@@ -1,10 +1,14 @@
 # hotdog
 
-A hotdog stand for all your doggy appointments.
+A hotdog stand for all your doggy appointments. Be the best dog parent you can be with hotdog!
 
 ---
 
 ## Description / User Story
+
+As a dog owner, I would like a place to make all my dog related appointments at once where I do not have to worry about making duplicate appointments, overlapping appointments, or having to keep track of everyone's opening hours. I would also like to be able to easily look for all the appointments I have made so far to easily keep track of when my next appointment will be.
+
+As a dog service provider, I would like my customers and clients to easily find information about me like opening hours, my address, etc. With hotdog, I do not have to go back and forth with my customers and clients on whether a certain slot is available, or whether or not I'm open for service during a certain timing. 
 
 ## Getting Started - Planning
 
@@ -13,9 +17,6 @@ A hotdog stand for all your doggy appointments.
 2.5 weeks
 
 ### [Trello Board](https://trello.com/b/baanBY4E/hotdog)
-
-###  ERD 
-<img src="">
 
 ### WireFrame in [Figma](https://www.figma.com/board/7wnZVosgaE0QaFPJUtcU9Z/Project-4?node-id=0-1&t=1dzTM2a8X56toXq8-0)
 
@@ -33,8 +34,8 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 - Two user types
   <img src="src/assets/ss/twoUser.gif">
 
-- Login 
-  <img src="src/assets/ss/login.png">
+- Login :navigation responds to user type
+  <img src="src/assets/ss/login.gif">
 
 - Profile Page (Vendor)
   <img src="src/assets/ss/vProfile.png">
@@ -57,11 +58,11 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 - Archives Page (pet owner)
   <img src="src/assets/ss/archives.png">
 
+- Map Page (pet owner)
+  <img src="src/assets/ss/map.gif">
+
 ### password hashing
  <img src="src/assets/ss/pwhash.png">
-
-### navigation responds to user login status.
-<img src=""> (g)
 
 ### Favourite Modal
 - 2 Referencing points
@@ -72,11 +73,12 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 
 ### Favourite Controller
 
-<img src="">
+using .populate()
+<img src="src/assets/ss/favCon.png">
 
 ### Favourite React Component - View
 
-<img src="">
+<img src="src/assets/ss/favView.png">
 
 ### Routing / API
 
@@ -107,8 +109,7 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 
   <img src="src/assets/ss/createAppt.png">
 
-- read
-restricting CUD data functionality to authenticated users
+- read: use params to restrict to authenticated users
   <img src="src/assets/ss/readAppts.png">
 
 - update
