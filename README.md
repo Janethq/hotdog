@@ -14,8 +14,6 @@ A hotdog stand for all your doggy appointments.
 
 ### [Trello Board](https://trello.com/b/baanBY4E/hotdog)
 
-<img src="">
-
 ###  ERD 
 <img src="">
 
@@ -25,8 +23,6 @@ A hotdog stand for all your doggy appointments.
 
 ### Example Schema in [Google Sheets](https://docs.google.com/spreadsheets/d/1Wf9Y4I4FwGgeJHnZQdMfJRzvozbgLiwgff7bcOgt40g/edit?gid=0#gid=0)
 
-<img src="">
-
 ### Deployed on Render
 
 Try it here: (https://hotdog-ypkn.onrender.com/)
@@ -35,7 +31,7 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 - Allows for 2 types of users with different sign up forms, profile, and appointments page.
 
 - Two user types
-  <img src="">(g)
+  <img src="src/assets/ss/twoUser.gif">
 
 - Login 
   <img src="src/assets/ss/login.png">
@@ -56,7 +52,7 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
   <img src="src/assets/ss/addAppts.png">
 
 - Search Page (pet owner)
-  <img src="">(g)
+  <img src="src/assets/ss/search.gif">
 
 - Archives Page (pet owner)
   <img src="src/assets/ss/archives.png">
@@ -124,19 +120,19 @@ restricting CUD data functionality to authenticated users
 ### Validation
 - Duplicate bookings
 <img src="src/assets/ss/duplicateAppt.png">
-<img src=""> (g)
+<img src="src/assets/ss/duplicate.gif">
 
 - Overlapping bookings
 <img src="src/assets/ss/overlap1.png">
 condition:
 <img src="src/assets/ss/overlap2.png">
-<img src=""> (g)
+<img src="src/assets/ss/overlap.gif"
 
 - Outside vendor opening hour bookings
 <img src="src/assets/ss/openinghr1.png">
 condition:
 <img src="src/assets/ss/openinghr2.png">
-<img src=""> (g)
+<img src="src/assets/ss/ophrs.gif">
 
 ### Biggest Challenge
 
@@ -199,7 +195,6 @@ condition:
 
 - allow pet owners to host playdates and for other pet owners to be able to look for upcoming playdates to join
 - uploading profile picture
-- maps to pin point vendor locations
 - accomodate multiple dog for pet owners
 - accomodate multiple vendors for the same type of service
 - Telegram reminder for your appointments
