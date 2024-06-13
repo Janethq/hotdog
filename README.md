@@ -74,7 +74,7 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 ### Favourite Controller
 
 using .populate()
-<img src="src/assets/ss/favCon.png">
+<img src="src/assets/ss/viewww.png">
 
 ### Favourite React Component - View
 
@@ -87,8 +87,6 @@ using .populate()
 
 - Appointment Routes
 <img src="src/assets/ss/apptRoutes.png">
-
-### different access to the APIs and Webpages
 
 ### CRUD (Fetch method)
 
