@@ -74,11 +74,11 @@ Try it here: (https://hotdog-ypkn.onrender.com/)
 ### Favourite Controller
 
 using .populate()
+<img src="src/assets/ss/favCon.png">
+
+### Favourite React Component
+
 <img src="src/assets/ss/viewww.png">
-
-### Favourite React Component - View
-
-<img src="src/assets/ss/favView.png">
 
 ### Routing / API
 
@@ -87,6 +87,7 @@ using .populate()
 
 - Appointment Routes
 <img src="src/assets/ss/apptRoutes.png">
+
 
 ### CRUD (Fetch method)
 
